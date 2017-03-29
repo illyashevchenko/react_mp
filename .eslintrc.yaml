@@ -2,3 +2,147 @@
   root: true
   extends:
     - 'react-app'
+
+  rules:
+    indent:
+      - error
+      - 2
+      -
+        SwitchCase: 1
+        VariableDeclarator: 1
+
+    comma-dangle:
+      - error
+      - always-multiline
+
+    key-spacing:
+      - error
+      -
+        beforeColon: false
+        afterColon: true
+
+    quotes:
+      - error
+      - single
+
+    func-names: off
+    no-param-reassign: off
+    curly:
+      - error
+      - all
+
+    no-confusing-arrow:
+      - error
+      -
+        allowParens: true
+
+    no-use-before-define:
+      - error
+      - nofunc
+
+    spaced-comment: off
+    quote-props:
+      - error
+      - as-needed
+      -
+        keywords: true
+
+    no-multiple-empty-lines:
+      - error
+      -
+        max: 2
+        maxEOF: 1
+        maxBOF: 0
+
+    no-multi-spaces:
+      - error
+      -
+        exceptions:
+          VariableDeclarator: false
+          Property: false
+          BinaryExpression: false
+          ImportDeclaration: false
+
+    no-shadow: off
+
+    no-underscore-dangle:
+      - error
+      -
+        allow:
+          - __
+
+    max-len:
+      - error
+      - 120
+      - 4
+      -
+        ignoreComments: true
+        ignoreUrls: true
+
+    arrow-body-style:
+      - error
+      - as-needed
+
+    arrow-parens:
+      - error
+      - always
+
+    no-console: warn
+
+    object-curly-spacing:
+      - error
+      - always
+    array-bracket-spacing:
+      - error
+      - never
+    computed-property-spacing:
+      - error
+      - never
+    template-curly-spacing:
+      - error
+      - always
+    space-in-parens:
+      - error
+      - never
+
+    space-before-function-paren:
+      - error
+      -
+       anonymous: always
+       named: never
+
+    complexity:
+      - error
+      - 5
+    no-extra-boolean-cast: error
+    no-void: error
+    max-depth:
+      - error
+      - 3
+    max-statements:
+      - error
+      - 15
+    max-params:
+      - error
+      - 3
+    max-nested-callbacks:
+      - error
+      - 3
+
+    no-bitwise:
+      - error
+
+    class-methods-use-this: off
+
+    newline-after-var: off
+    newline-before-return: off
+    newline-per-chained-call: error
+
+    no-continue: error
+    no-undefined: error
+    no-this-before-super: error
+
+    no-useless-return: error
+    prefer-spread: error
+
+    no-mixed-operators: off
