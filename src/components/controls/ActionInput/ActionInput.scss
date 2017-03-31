@@ -1,3 +1,20 @@
-.Button {
+@import '../../layouts/fonts.scss';
+@import '../../layouts/colors.scss';
+@import '../../layouts/forms.scss';
 
+.ActionInput {
+  width: 100%;
+  display: flex;
+
+  &__input {
+    flex-grow: 1;
+
+    @include form-element-base;
+    @include form-element-states;
+    @include form-element-default;
+    @include form-element-sibling-on-right;
+  }
+
+  &__button {
+  }
 }

@@ -1,0 +1,52 @@
+@import './colors.scss';
+@import './fonts.scss';
+
+@mixin shadow() {
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+@mixin form-element-base() {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 6px 12px;
+
+  //line-height: 1.42857143;
+
+  font-size: $font-middle;
+  font-weight: $font-normal;
+}
+
+@mixin form-element-states {
+  &:focus {
+    outline: 0;
+    border-color: $light-blue;
+    @include shadow;
+  }
+
+  &--error {
+    border-color: $dark-red;
+    @include shadow;
+  }
+
+  &--valid {
+    border-color: $dark-green;
+    @include shadow;
+  }
+}
+
+@mixin form-element-default() {
+  border-color: $dark-white;
+  background-color: $white;
+  color: $darky-gray;
+}
+
+@mixin form-element-sibling-on-right() {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+@mixin form-element-sibling-on-left() {
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}

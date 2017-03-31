@@ -1,3 +1,33 @@
-.Button {
+@import '../../layouts/colors.scss';
+@import '../../layouts/forms.scss';
 
+.Button {
+  display: inline-block;
+
+  cursor: pointer;
+
+  @include form-element-base;
+
+  text-align: center;
+  white-space: nowrap;
+  //vertical-align: middle;
+
+  &--default {
+    border-color: $dark-white;
+    background-color: $white;
+    color: $dark-gray;
+
+    &:hover {
+      background-color: $darky-white;
+      border-color: $grayish-white;
+    }
+  }
+
+  &--sibling-on-right {
+    @include form-element-sibling-on-right;
+  }
+
+  &--sibling-on-left {
+    @include form-element-sibling-on-left;
+  }
 }
