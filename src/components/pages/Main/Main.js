@@ -13,7 +13,7 @@ class Main extends PureComponent {
     return (
       <div className="Main">
         <Header text="To-Do List"/>
-        <ProgressBar />
+        <ProgressBar complete="15"/>
         <TwoRows left={ <CategoryList /> }
                  right={ <TodoList /> }/>
       </div>
