@@ -1,9 +1,16 @@
 import React, { PureComponent } from 'react';
 import './ActionInput.css';
 
+import Button from '../Button/Button.js'
+
 class ActionInput extends PureComponent {
   render() {
-    return <button className="Button">Add</button>;
+    return (
+      <div>
+        <input/>
+        <Button>Add</Button>
+      </div>
+    );
   }
 }
 
