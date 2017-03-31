@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import './ActionInput.css';
 
 import Button from '../Button/Button.js'
 
-class ActionInput extends Component {
+class ActionInput extends PureComponent {
   constructor(props) {
     super(props);
 
