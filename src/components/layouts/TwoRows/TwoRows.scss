@@ -1,10 +1,12 @@
 .TwoRows {
   display: flex;
+  margin-top: 20px;
 
   &__left {
   }
 
   &__right {
     flex-grow: 1;
+    margin-left: 15px;
   }
 }
