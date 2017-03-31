@@ -4,7 +4,7 @@ import './Button.css';
 const baseClass = 'Button';
 
 const getSiblingOnClass = (siblingOn) =>
-  siblingOn.map(type => `${ baseClass }--sibling-on-${ type }`);
+  siblingOn.map((type) => `${ baseClass }--sibling-on-${ type }`);
 
 const getClass = (type = 'default', siblingOn = []) =>
   `${ baseClass } ${ baseClass }--${ type } ${ getSiblingOnClass(siblingOn) }`;
