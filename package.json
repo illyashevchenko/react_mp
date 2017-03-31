@@ -10,7 +10,8 @@
     "husky": "^0.13.3",
     "node-sass": "^4.5.2",
     "npm-run-all": "^4.0.2",
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "@kadira/storybook": "^2.21.0"
   },
   "scripts": {
     "start": "npm-run-all -p watch-css start-js",
@@ -21,6 +22,8 @@
     "build-css": "node-sass src/ -o src/",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "lint": "eslint ./src",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   }
 }
