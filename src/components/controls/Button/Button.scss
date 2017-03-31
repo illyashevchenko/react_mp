@@ -12,6 +12,10 @@
   white-space: nowrap;
   //vertical-align: middle;
 
+  &:focus {
+    outline: 0;
+  }
+
   &--default {
     border-color: $dark-white;
     background-color: $white;
