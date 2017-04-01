@@ -11,7 +11,8 @@ const config = {
     symbol: true,
   },
 };
-const destFile = `${ config.dest }/icons.svg`;
+const destFolder = path.resolve(config.dest);
+const destFile = path.join(destFolder, 'icons.svg');
 
 const resolve = path.resolve.bind(path, __dirname);
 const testFolder = resolve('./sprites/');
@@ -31,7 +32,7 @@ const compile = () => {
   spriter.compile(function (error, result) {
     const file = result.symbol.sprite;
 
-    mkdirp.sync(path.dirname(file.path));
+    mkdirp.sync(destFolder);
     fs.writeFileSync(destFile, file.contents);
   });
 };
