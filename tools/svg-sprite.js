@@ -6,7 +6,7 @@ const mkdirp = require('mkdirp');
 const fs = require('fs');
 
 const config = {
-  dest: 'src/components/layouts',
+  dest: 'src/components/assets',
   mode: {
     symbol: true,
   },
