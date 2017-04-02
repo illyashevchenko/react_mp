@@ -1,7 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import './CategoryList.css';
 
-import ItemsList from '../ItemsList/ItemsList.js';
+import ItemList from '../ItemList/ItemList.js';
 import Category from '../Category/Category.js';
 import ActionInput from '../../controls/ActionInput/ActionInput.js';
 
@@ -42,7 +42,7 @@ class CategoryList extends PureComponent {
         placeholder="Enter category title"
         actionTitle="Add"
         onAct={ this.add }/>
-      <ItemsList
+      <ItemList
         list={ this.props.categories }
         select={ this.props.actions.select }
         Element={ Category }

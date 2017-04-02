@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { path, split, useWith, identity, curry } from 'ramda';
 
-import './ItemsList.css';
+import './ItemList.css';
 
 const key = useWith(path, [split('.'), identity]);
 
@@ -14,7 +14,7 @@ const createItem = curry(({ Element, keyPath, select }, item) =>
 );
 
 const ItemsList = (props) =>
-  <div className="ItemsList">
+  <div className="ItemList">
     { props.list.map(createItem(props)) }
   </div>;
 

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import './TodoList.css';
 
-import ItemsList from '../ItemsList/ItemsList.js';
+import ItemList from '../ItemList/ItemList.js';
 import ToDo from '../ToDo/Todo.js';
 import ActionInput from '../../controls/ActionInput/ActionInput.js';
 
@@ -17,7 +17,7 @@ class TodoList extends PureComponent {
         placeholder="Enter title"
         actionTitle="Add"
         onAct={ this.add }/>
-      <ItemsList
+      <ItemList
         list={ this.props.tasks }
         Element={ ToDo }
         keyPath="id"/>
