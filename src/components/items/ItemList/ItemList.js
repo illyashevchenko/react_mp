@@ -20,7 +20,7 @@ const ItemsList = (props) =>
 
 ItemsList.propTypes = {
   list: PropTypes.arrayOf(PropTypes.object).isRequired,
-  Element: PropTypes.func,
+  Element: PropTypes.func.isRequired,
   keyPath: PropTypes.string.isRequired,
   select: PropTypes.func,
 };

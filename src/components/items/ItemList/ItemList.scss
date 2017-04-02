@@ -1,7 +1,5 @@
 .ItemList {
   &__item {
-    &:not(:first-child) {
-      margin-top: 3px;
-    }
+    margin-top: 3px;
   }
 }
