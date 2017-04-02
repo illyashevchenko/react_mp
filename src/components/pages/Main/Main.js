@@ -1,12 +1,13 @@
 import React, { PureComponent, PropTypes } from 'react';
 import './Main.css';
 
+import { filter, prop } from 'ramda';
+
 import Header from '../../page-elements/Header/Header.js';
 import ProgressBar from '../../page-elements/ProgressBar/ProgressBar.js';
 import CategoryList from '../../items/CategoryList/CategoryList.js';
 import TodoList from '../../items/TodoList/TodoList.js';
 import TwoRows from '../../layouts/TwoRows/TwoRows.js';
-
 
 class Main extends PureComponent {
   createCategoryList() {
@@ -19,6 +20,8 @@ class Main extends PureComponent {
         }}/>
     );
   }
+
+  completedList = filter(prop('done'));
 
   createTodoList() {
     return (
@@ -33,10 +36,10 @@ class Main extends PureComponent {
   }
 
   getCompleted() {
-    const completed = this.props.tasks.map((task) => task.done);
+    const completed = this.completedList(this.props.tasks).length;
     const all = this.props.tasks.length;
 
-    return Math.round(completed / all);
+    return Math.round(100 * completed / all);
   }
 
   render() {
