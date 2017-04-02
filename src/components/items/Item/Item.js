@@ -1,10 +1,8 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import './Item.css';
 
-class Item extends PureComponent {
-  render() {
-    return <div className="Item">Here will be cool item</div>;
-  }
-}
+const Item = ({ children }) => (
+  <div className="Item">{ children }</div>
+);
 
 export default Item;

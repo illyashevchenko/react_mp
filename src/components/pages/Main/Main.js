@@ -12,7 +12,7 @@ class Main extends PureComponent {
   createCategoryList() {
     return (
       <CategoryList
-        list={ this.props.categories }
+        categories={ this.props.categories }
         actions={{
           set: this.props.setCategories,
           select: this.props.selectCategory,
@@ -23,7 +23,7 @@ class Main extends PureComponent {
   createTodoList() {
     return (
       <TodoList
-        list={ this.props.tasks }
+        tasks={ this.props.tasks }
         activeCategory={ this.props.category }
         filter={ { search: '', done: false } }
         actions={{
@@ -55,7 +55,7 @@ class Main extends PureComponent {
 
 Main.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  category: PropTypes.object.isRequired,
+  category: PropTypes.object,
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
 
   setCategories: PropTypes.func.isRequired,
