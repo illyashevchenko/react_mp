@@ -1,0 +1,11 @@
+$border-radius-normal: 4px;
+
+@mixin round-corners {
+  border: 1px solid transparent;
+  border-radius: $border-radius-normal;
+}
+
+@mixin shadow() {
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+}
+

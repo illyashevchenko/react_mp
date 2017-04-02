@@ -1,13 +1,9 @@
 @import './colors.scss';
 @import './fonts.scss';
-
-@mixin shadow() {
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
-}
+@import './styles.scss';
 
 @mixin form-element-base() {
-  border: 1px solid transparent;
-  border-radius: 4px;
+  @include round-corners;
   padding: 6px 12px;
 
   //line-height: 1.42857143;
