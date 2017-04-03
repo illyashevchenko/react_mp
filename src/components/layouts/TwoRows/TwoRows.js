@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import './TwoRows.css';
 
-function TwoRows(props) {
+function TwoRows({ left, right, className }) {
   return (
-    <div className="TwoRows">
+    <div className={ `TwoRows ${ className }` }>
       <div className="TwoRows__left">
-        { props.left }
+        { left }
       </div>
       <div className="TwoRows__right">
-        { props.right }
+        { right }
       </div>
     </div>);
 }

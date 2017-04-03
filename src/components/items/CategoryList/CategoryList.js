@@ -39,10 +39,12 @@ class CategoryList extends PureComponent {
   render() {
     return <div className="CategoryList">
       <ActionInput
+        className="CategoryList__input"
         placeholder="Enter category title"
         actionTitle="Add"
         onAct={ this.add }/>
       <ItemList
+        className="CategoryList__list"
         list={ this.props.categories }
         select={ this.props.actions.select }
         Element={ Category }

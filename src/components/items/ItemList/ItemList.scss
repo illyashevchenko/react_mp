@@ -1,4 +1,6 @@
 .ItemList {
+  overflow: scroll;
+
   &__item {
     margin-top: 3px;
   }

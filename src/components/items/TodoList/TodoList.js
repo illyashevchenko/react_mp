@@ -14,10 +14,12 @@ class TodoList extends PureComponent {
   render() {
     return <div className="TodoList">
       <ActionInput
+        className="TodoList__input"
         placeholder="Enter title"
         actionTitle="Add"
         onAct={ this.add }/>
       <ItemList
+        className="TodoList__list"
         list={ this.props.tasks }
         Element={ ToDo }
         keyPath="id"/>

@@ -1,12 +1,16 @@
+@import '../../assets/styles.scss';
+
 .TwoRows {
   display: flex;
   margin-top: 20px;
 
   &__left {
+    @include flex-stretchy;
   }
 
   &__right {
-    flex-grow: 1;
     margin-left: 15px;
+    @include flex-stretchy;
+    flex-grow: 2;
   }
 }

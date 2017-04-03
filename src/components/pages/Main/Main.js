@@ -44,10 +44,13 @@ class Main extends PureComponent {
 
   render() {
     return (
-      <div className="Main">
-        <Header text="To-Do List"/>
-        <ProgressBar complete={ this.getCompleted()}/>
+      <div className="Main page">
+        <div className="page__section-static">
+          <Header text="To-Do List"/>
+          <ProgressBar complete={ this.getCompleted()}/>
+        </div>
         <TwoRows
+          className="page__section-flexible"
           left={ this.createCategoryList() }
           right={ this.createTodoList() }/>
       </div>

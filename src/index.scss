@@ -1,7 +1,17 @@
 @import 'components/assets/fonts.scss';
+@import 'components/assets/styles.scss';
+
 
 body {
   margin: 0;
   padding: 0;
   font-family: $main-font-family;
 }
+
+html,
+body,
+#root,
+main {
+  @include full-height;
+}
+

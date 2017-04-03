@@ -45,10 +45,10 @@ class ActionInput extends PureComponent {
   }
 
   render() {
-    const { placeholder, actionTitle } = this.props;
+    const { placeholder, actionTitle, className } = this.props;
 
     return (
-      <div className="ActionInput">
+      <div className={ `ActionInput ${ className }` }>
         <input className="ActionInput__input"
                placeholder={ placeholder }
                value={ this.state.value }
@@ -62,6 +62,7 @@ class ActionInput extends PureComponent {
   }
 
   static propTypes = {
+    className: PropTypes.string,
     placeholder: PropTypes.string,
     actionTitle: PropTypes.string.isRequired,
     onAct: PropTypes.func.isRequired,

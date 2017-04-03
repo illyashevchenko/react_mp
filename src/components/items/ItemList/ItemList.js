@@ -14,7 +14,7 @@ const createItem = curry(({ Element, keyPath, select }, item) =>
 );
 
 const ItemsList = (props) =>
-  <div className="ItemList">
+  <div className={ `ItemList  ${ props.className }` }>
     { props.list.map(createItem(props)) }
   </div>;
 
@@ -23,6 +23,7 @@ ItemsList.propTypes = {
   Element: PropTypes.func.isRequired,
   keyPath: PropTypes.string.isRequired,
   select: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default ItemsList;
