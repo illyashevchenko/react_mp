@@ -11,27 +11,25 @@ import TwoRows from '../../layouts/TwoRows/TwoRows.js';
 
 class Main extends PureComponent {
   createCategoryList() {
+    const { categories, category, setCategories: set, selectCategory: select } = this.props;
     return (
       <CategoryList
-        categories={ this.props.categories }
-        actions={{
-          set: this.props.setCategories,
-          select: this.props.selectCategory,
-        }}/>
+        categories={ categories }
+        active={ category }
+        actions={ { set, select } }/>
     );
   }
 
   completedList = filter(prop('done'));
 
   createTodoList() {
+    const { tasks, category, setTasks: set } = this.props;
     return (
       <TodoList
-        tasks={ this.props.tasks }
-        activeCategory={ this.props.category }
+        tasks={ tasks }
+        activeCategory={ category }
         filter={ { search: '', done: false } }
-        actions={{
-          set: this.props.setTasks,
-        }}/>
+        actions={ { set } }/>
     );
   }
 

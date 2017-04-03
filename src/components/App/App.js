@@ -67,9 +67,7 @@ class App extends Component {
     return (
       <div className="App">
         <MainPage
-          tasks={ this.state.tasks }
-          categories={ this.state.categories }
-          category={ this.state.category }
+          { ...this.state }
           setCategories={ this.setCategories }
           setTasks={ this.setTasks }
           selectCategory={ this.selectCategory }/>

@@ -3,7 +3,7 @@ import './IconButton.css';
 
 class IconButton extends PureComponent {
   render() {
-    return <div className="IconButton">a</div>;
+    return <span className="IconButton">a</span>;
   }
 }
 

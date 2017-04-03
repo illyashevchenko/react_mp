@@ -3,8 +3,8 @@ import './Category.css';
 
 import Item from '../Item/Item.js';
 
-const Category = ({ title }) => (
-  <Item>{ title }</Item>
+const Category = (props) => (
+  <Item {...props}>{ props.title }</Item>
 );
 
 export default Category;

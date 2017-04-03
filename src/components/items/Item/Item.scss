@@ -3,6 +3,7 @@
 
 .Item {
   @include round-corners;
+  @include flex;
 
   background-color: $white;
   border-color: $slightly-dark-white;
@@ -15,5 +16,9 @@
 
   &--large {
     padding: 15px;
+  }
+
+  &--active {
+    background-color: $light-blue;
   }
 }

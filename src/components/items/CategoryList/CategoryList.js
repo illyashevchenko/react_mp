@@ -37,6 +37,7 @@ class CategoryList extends PureComponent {
   }
 
   render() {
+    const { categories, active, actions: { select } } = this.props;
     return <div className="CategoryList">
       <ActionInput
         className="CategoryList__input"
@@ -45,8 +46,9 @@ class CategoryList extends PureComponent {
         onAct={ this.add }/>
       <ItemList
         className="CategoryList__list"
-        list={ this.props.categories }
-        select={ this.props.actions.select }
+        list={ categories }
+        active={ active }
+        select={ select }
         Element={ Category }
         keyPath="id"/>
     </div>;
@@ -55,6 +57,7 @@ class CategoryList extends PureComponent {
 
 CategoryList.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  active: PropTypes.object,
   actions: PropTypes.shape({
     set: PropTypes.func.isRequired,
     select: PropTypes.func.isRequired,
