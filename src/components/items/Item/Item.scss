@@ -5,6 +5,8 @@
   @include round-corners;
   @include flex;
 
+  align-items: center;
+
   background-color: $white;
   border-color: $slightly-dark-white;
 

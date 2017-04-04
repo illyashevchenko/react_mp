@@ -11,8 +11,10 @@ const DoTo = ({ title }) => (
       type="checkbox"/>
     <span className="Item__title">{ title }</span>
     <span className="Item__actions">
-      <IconButton />
-      <IconButton />
+      <IconButton name="edit"
+                  onClick={ () => {} }/>
+      <IconButton name="add"
+                  onClick={ () => {} }/>
     </span>
   </Item>
 );

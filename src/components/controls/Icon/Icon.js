@@ -1,14 +1,23 @@
 import React, { PropTypes } from 'react';
 import './Icon.css';
 
-const Icon = ({ name, className }) =>
-  <svg className={ className }>
-    <use xlinkHref={ `#${ name } `}/>
+const baseClass = 'Icon';
+const getClass = ({ className, size = 'small' }) =>
+  [
+    className,
+    baseClass,
+    `${ baseClass }--${ size }`,
+  ].join(' ');
+
+const Icon = (props) =>
+  <svg className={ getClass(props) }>
+    <use xlinkHref={ `#${ props.name }` }/>
   </svg>;
 
 Icon.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string.isRequired,
+  size: PropTypes.string,
 };
 
 export default Icon;
