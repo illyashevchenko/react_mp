@@ -7,13 +7,15 @@ import IconButton from '../../controls/IconButton/IconButton.js';
 const DoTo = ({ title }) => (
   <Item size="large">
     <input
-      className="Item__button Todo__input"
+      className="Item__section"
       type="checkbox"/>
-    <span className="Item__title">{ title }</span>
+    <span className="Item__main">
+      <span className="Item__section">{ title }</span>
+      <IconButton name="add"
+                  onClick={ () => {} }/>
+      </span>
     <span className="Item__actions">
       <IconButton name="edit"
-                  onClick={ () => {} }/>
-      <IconButton name="add"
                   onClick={ () => {} }/>
     </span>
   </Item>

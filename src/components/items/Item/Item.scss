@@ -23,4 +23,15 @@
   &--active {
     background-color: $light-blue;
   }
+
+  $padding-section: 10px;
+
+  &__main {
+    @include flex-stretchy;
+    margin-right: $padding-section;
+  }
+
+  &__section {
+    margin-right: $padding-section;
+  }
 }
