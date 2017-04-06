@@ -10,6 +10,7 @@
     flex-grow: 1;
 
     @include form-element-base;
+    @include form-element-padding;
     @include form-element-states;
     @include form-element-default;
     @include form-element-sibling-on-right;

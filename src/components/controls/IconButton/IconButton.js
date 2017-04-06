@@ -10,14 +10,16 @@ const createClicker = (onClick) =>
     onClick(event)
   };
 
-const IconButton = ({ name, onClick }) =>
+const IconButton = (props) =>
   <Button type="default"
-          onClick={ createClicker(onClick) }>
-      <Icon name={ name }/>
+          { ...props }
+          onClick={ createClicker(props.onClick) }>
+    <Icon { ...props }/>
   </Button>;
 
 IconButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
+  size: PropTypes.string,
 };
 export default IconButton;

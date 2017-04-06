@@ -6,13 +6,19 @@ const baseClass = 'Button';
 const getSiblingOnClass = (siblingOn) =>
   siblingOn.map((type) => `${ baseClass }--sibling-on-${ type }`);
 
-const getClass = (type = 'default', siblingOn = []) =>
-  `${ baseClass } ${ baseClass }--${ type } ${ getSiblingOnClass(siblingOn) }`;
+const getClass = ({ type = 'default', siblingOn = [], size = 'normal' }) =>
+  [
+    baseClass,
+    `${ baseClass }--${ type }`,
+    `${ baseClass }--${ size }`,
+  ]
+    .concat(getSiblingOnClass(siblingOn))
+    .join(' ');
 
 
-const Button = ({ onClick, children, type, siblingOn }) =>
-  <button className={ getClass(type, siblingOn) }
-          onClick={ onClick }>{ children }</button>;
+const Button = (props) =>
+  <button className={ getClass(props) }
+          onClick={ props.onClick }>{ props.children }</button>;
 
 Button.propTypes = {
   onClick: PropTypes.func.isRequired,

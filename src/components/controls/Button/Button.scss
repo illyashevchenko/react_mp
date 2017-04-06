@@ -34,4 +34,16 @@
   &--sibling-on-left {
     @include form-element-sibling-on-left;
   }
+
+  &--small {
+    @include form-element-padding('small');
+  }
+
+  &--middle {
+    @include form-element-padding('middle');
+  }
+
+  &--large {
+    @include form-element-padding('large');
+  }
 }
