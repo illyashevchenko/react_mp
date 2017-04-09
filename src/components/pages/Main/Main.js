@@ -26,23 +26,34 @@ class Main extends PureComponent {
   }
 
   createCategoryList() {
-    const { categories, category, setCategories: set, selectCategory: select } = this.props;
+    const { categories, category, setCategories, selectCategory } = this.props;
+    this.categoriesActions = this.categoriesActions ||
+      {
+        set: setCategories,
+        select: selectCategory,
+      };
+
     return (
       <CategoryList
         categories={ categories }
         active={ category }
-        actions={ { set, select } }/>
+        actions={ this.categoriesActions }/>
     );
   }
 
   createTodoList() {
-    const { tasks, category, setTasks: set } = this.props;
+    const { tasks, category, setTasks } = this.props;
+    this.todoActions = this.todoActions ||
+      {
+        set: setTasks,
+      };
+
     return (
       <TodoList
         tasks={ tasks }
         activeCategory={ category }
         filter={ this.state.filter }
-        actions={ { set } }/>
+        actions={ this.todoActions }/>
     );
   }
 
