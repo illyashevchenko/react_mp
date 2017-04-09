@@ -1,0 +1,28 @@
+@import '../../assets/colors.scss';
+@import '../../assets/forms.scss';
+
+.ToDoFilter {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+
+  &__block {
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+
+  &__input {
+    min-width: 280px;
+    @include form-element-base;
+    @include form-element-padding;
+    @include form-element-states;
+    @include form-element-default;
+  }
+
+  &__checkbox {
+    margin-right: 6px;
+  }
+}
+
+
