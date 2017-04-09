@@ -16,14 +16,14 @@ const ToDoFilter = ({ filter, actions: { set } }) =>
         type="checkbox"
         className="ToDoFilter__checkbox"
         value={ filter.onlyDone }
-        onChange={ setItem(set, filter, 'search', 'value') }/>
+        onChange={ setItem(set, filter, 'onlyDone', 'checked') }/>
       Show done
     </label>
     <input
       className="ToDoFilter__block ToDoFilter__input"
       placeholder="Search ..."
       value={ filter.search }
-      onChange={ setItem(set, filter, 'onlyDone', 'checked') }/>
+      onChange={ setItem(set, filter, 'search', 'value') }/>
   </div>;
 
 ToDoFilter.PropTypes = {
