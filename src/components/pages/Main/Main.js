@@ -27,7 +27,7 @@ class Main extends PureComponent {
       <TodoList
         tasks={ tasks }
         activeCategory={ category }
-        filter={ { search: '', done: false } }
+        filter={ { search: '', onlyDone: false } }
         actions={ { set } }/>
     );
   }
