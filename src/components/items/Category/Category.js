@@ -7,11 +7,11 @@ import IconButton from '../../controls/IconButton/IconButton.js';
 const edit = () => ({});
 const add = () => ({});
 
-const Category = ({ title }) => (
-  <Item size="small">
+const Category = (props) => (
+  <Item size="small" { ...props }>
     <span className="Item__section"/>
     <span className="Item__main">
-      <span className="Item__section">{ title }</span>
+      <span className="Item__section">{ props.title }</span>
       <IconButton name="add"
                   size="small"
                   onClick={ add }/>

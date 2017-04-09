@@ -8,7 +8,7 @@ const key = useWith(path, [split('.'), identity]);
 const createItem = curry(({ Element, keyPath, select, active }, item) =>
   <div className="ItemList__item"
        key={ key(keyPath, item) }
-       onClick={ () => select(item) }>
+       onClick={ select && (() => select(item)) }>
     {
       <Element {...item}
                isActive={ active === item }/>
