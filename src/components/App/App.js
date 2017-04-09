@@ -20,16 +20,16 @@ class App extends Component {
         { title: 'Category2', id: 2 },
         {
           title: 'Category3', id: 3,
-          subId: [4, 5],
+          subIds: [4, 5],
         },
         { title: 'Category4', id: 4 },
         {
           title: 'Category5', id: 5,
-          subId: [6],
+          subIds: [6],
         },
         {
           title: 'Category6', id: 6,
-          subId: [7, 8],
+          subIds: [7, 8],
         },
         { title: 'Category7', id: 7 },
         { title: 'Category8', id: 8 },
