@@ -1,7 +1,8 @@
 import React, { PureComponent, PropTypes } from 'react';
 import './Main.css';
 
-import { filter, prop } from 'ramda';
+import actions from './actions.js';
+const { completedPercentage } = actions;
 
 import Header from '../../page-elements/Header/Header.js';
 import ProgressBar from '../../page-elements/ProgressBar/ProgressBar.js';
@@ -31,21 +32,12 @@ class Main extends PureComponent {
     );
   }
 
-  completedList = filter(prop('done'));
-
-  getCompleted() {
-    const completed = this.completedList(this.props.tasks).length;
-    const all = this.props.tasks.length;
-
-    return Math.round(100 * completed / all);
-  }
-
   render() {
     return (
       <div className="Main page">
         <div className="page__section-static">
           <Header text="To-Do List"/>
-          <ProgressBar complete={ this.getCompleted()}/>
+          <ProgressBar complete={ completedPercentage(this.props.tasks)}/>
         </div>
         <TwoRows
           className="page__section-flexible"
