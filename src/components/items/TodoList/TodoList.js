@@ -21,6 +21,10 @@ class TodoList extends PureComponent {
   }
 
   add(title) {
+    if (!title) {
+      return;
+    }
+
     const { actions: { set }, activeCategory, tasks } = this.props;
     const toDo = create(title, activeCategory);
 

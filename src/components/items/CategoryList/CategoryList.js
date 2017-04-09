@@ -23,11 +23,8 @@ class CategoryList extends PureComponent {
 
     const categories = this.props.categories;
 
-    const ids = categories.map((category) => category.id);
-    const maxId = Math.max(...ids);
-
     this.props.actions.set([
-      { title, id: maxId + 1 },
+      { title, id: Date.now() },
       ...categories,
     ]);
   }
