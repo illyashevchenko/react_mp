@@ -65,7 +65,7 @@ class TodoList extends PureComponent {
           Element={ ToDo }
           keyPath="id"/>
       </div>
-      : null;
+      : <div>There is no active category. Please select one</div>;
   }
 }
 
