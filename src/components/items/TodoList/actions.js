@@ -20,4 +20,13 @@ const create = (title, category) => ({
   id: Date.now(),
 });
 
-export default { filtered, create };
+
+const toggleDone = (targetItem, list) =>
+  list.map((item) =>
+    (item === targetItem
+      ? { ...item, done: !item.done }
+      : item)
+  );
+
+
+export default { filtered, create, toggleDone };

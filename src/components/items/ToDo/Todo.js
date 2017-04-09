@@ -9,6 +9,7 @@ const ToDo = (props) => (
     <input
       className="Item__section"
       type="checkbox"
+      checked={ props.item.done }
       onChange={ () => props.actions.toggle(props.item)}/>
     <span className="Item__main">{ props.item.title }</span>
     <span className="Item__actions">

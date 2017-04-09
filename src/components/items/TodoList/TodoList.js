@@ -6,7 +6,7 @@ import ToDo from '../ToDo/Todo.js';
 import ActionInput from '../../controls/ActionInput/ActionInput.js';
 
 import actions from './actions';
-const { filtered, create } = actions;
+const { filtered, create, toggleDone } = actions;
 
 const emptyList = [];
 
@@ -28,7 +28,9 @@ class TodoList extends PureComponent {
   }
 
   toggleDone(item) {
-    console.log(item);
+    const { actions: { set }, tasks } = this.props;
+
+    set(toggleDone(item, tasks));
   }
 
   getList() {
