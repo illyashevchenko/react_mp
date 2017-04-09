@@ -5,16 +5,18 @@ import './ItemList.css';
 
 const key = useWith(path, [split('.'), identity]);
 
-const createItem = curry(({ Element, keyPath, select, active }, item) =>
-  <div className="ItemList__item"
-       key={ key(keyPath, item) }
-       onClick={ select && (() => select(item)) }>
+const createItem = curry(function ({ Element, keyPath, actions = {}, active }, item) {
+  return <div
+    className="ItemList__item"
+    key={ key(keyPath, item) }
+    onClick={ actions.select && actions.select.bind(null, item) }>
     {
-      <Element {...item}
+      <Element item={ item }
+               actions={ actions }
                isActive={ active === item }/>
     }
   </div>
-);
+});
 
 const ItemsList = (props) =>
   <div className={ `ItemList  ${ props.className }` }>
@@ -26,7 +28,9 @@ ItemsList.propTypes = {
   Element: PropTypes.func.isRequired,
   keyPath: PropTypes.string.isRequired,
   active: PropTypes.object,
-  select: PropTypes.func,
+  actions: PropTypes.shape({
+    select: PropTypes.func,
+  }),
   className: PropTypes.string,
 };
 

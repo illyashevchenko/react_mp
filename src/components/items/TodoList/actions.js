@@ -12,4 +12,12 @@ const whereMatcher = ({ search, onlyDone, categoryId }) => ({
 const matcher = pipe(whereMatcher, where);
 const filtered = useWith(filter, [matcher, identity]);
 
-export default { filtered };
+
+const create = (title, category) => ({
+  title,
+  categoryId: category.id,
+  done: false,
+  id: Date.now(),
+});
+
+export default { filtered, create };

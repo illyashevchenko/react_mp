@@ -1,22 +1,30 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import './Todo.css';
 
 import Item from '../Item/Item.js';
 import IconButton from '../../controls/IconButton/IconButton.js';
 
-const DoTo = (props) => (
+const ToDo = (props) => (
   <Item size="large" { ...props }>
     <input
       className="Item__section"
-      type="checkbox"/>
-    <span className="Item__main">{ props.title }</span>
+      type="checkbox"
+      onChange={ () => props.actions.toggle(props.item)}/>
+    <span className="Item__main">{ props.item.title }</span>
     <span className="Item__actions">
       <IconButton
         name="edit"
-        onClick={ () => {
-        } }/>
+        onClick={ () => ({}) }/>
     </span>
   </Item>
 );
 
-export default DoTo;
+ToDo.propTypes = {
+  item: PropTypes.object.isRequired,
+  actions: PropTypes.shape({
+    edit: PropTypes.func,
+    toggle: PropTypes.func.isRequired,
+  }),
+};
+
+export default ToDo;

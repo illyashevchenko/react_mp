@@ -11,7 +11,7 @@ const Category = (props) => (
   <Item size="small" { ...props }>
     <span className="Item__section"/>
     <span className="Item__main">
-      <span className="Item__section">{ props.title }</span>
+      <span className="Item__section">{ props.item.title }</span>
       <IconButton name="add"
                   size="small"
                   onClick={ add }/>

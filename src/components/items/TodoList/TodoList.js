@@ -6,20 +6,36 @@ import ToDo from '../ToDo/Todo.js';
 import ActionInput from '../../controls/ActionInput/ActionInput.js';
 
 import actions from './actions';
-const { filtered } = actions;
+const { filtered, create } = actions;
 
 const emptyList = [];
 
 class TodoList extends PureComponent {
   constructor(props) {
     super(props);
-    this.add = () => ({});
+
+    this.add = this.add.bind(this);
+    this.taskActions = {
+      toggle: this.toggleDone.bind(this),
+    };
+  }
+
+  add(title) {
+    const { actions: { set }, activeCategory, tasks } = this.props;
+    const toDo = create(title, activeCategory);
+
+    set([toDo, ...tasks]);
+  }
+
+  toggleDone(item) {
+    console.log(item);
   }
 
   getList() {
     const {
       filter: { search, onlyDone },
       activeCategory,
+      tasks,
     } = this.props;
 
     const { id: categoryId } = activeCategory || {}; // for some reason babel doesn't allow default values in destructuring
@@ -29,22 +45,25 @@ class TodoList extends PureComponent {
     }
 
     const filter = { search, onlyDone, categoryId };
-    return filtered(filter, this.props.tasks);
+    return filtered(filter, tasks);
   }
 
   render() {
-    return <div className="TodoList">
-      <ActionInput
-        className="TodoList__input"
-        placeholder="Enter title"
-        actionTitle="Add"
-        onAct={ this.add }/>
-      <ItemList
-        className="TodoList__list"
-        list={ this.getList() }
-        Element={ ToDo }
-        keyPath="id"/>
-    </div>;
+    return this.props.activeCategory
+      ? <div className="TodoList">
+        <ActionInput
+          className="TodoList__input"
+          placeholder="Enter title"
+          actionTitle="Add"
+          onAct={ this.add }/>
+        <ItemList
+          className="TodoList__list"
+          list={ this.getList() }
+          actions={ this.taskActions }
+          Element={ ToDo }
+          keyPath="id"/>
+      </div>
+      : null;
   }
 }
 

@@ -10,6 +10,10 @@ class CategoryList extends PureComponent {
     super(props);
 
     this.add = this.add.bind(this);
+    this.categoryActions = {
+      remove: this.remove.bind(this),
+      edit: this.edit.bind(this),
+    }
   }
 
   add(title) {
@@ -48,7 +52,7 @@ class CategoryList extends PureComponent {
         className="CategoryList__list"
         list={ categories }
         active={ active }
-        select={ select }
+        actions={ { ...this.categoryActions, select } }
         Element={ Category }
         keyPath="id"/>
     </div>;
