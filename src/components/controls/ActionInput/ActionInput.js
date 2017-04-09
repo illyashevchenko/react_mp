@@ -44,31 +44,19 @@ class ActionInput extends PureComponent {
     }
   }
 
-  getInputClassName(hasButton) {
-    return [
-      this.inputBaseClass,
-      hasButton && `${ this.inputBaseClass }--has-button`,
-    ].join(' ');
-  }
-
-  inputBaseClass = 'ActionInput__input';
-
   render() {
     const { placeholder, actionTitle, className } = this.props;
 
     return (
       <div className={ `ActionInput ${ className }` }>
-        <input className={ this.getInputClassName(actionTitle) }
+        <input className="ActionInput__input"
                placeholder={ placeholder }
                value={ this.state.value }
                onChange={ this.handleChange }
                onKeyDown={ this.handleKeyEvent }/>
-
-        { actionTitle &&
         <Button className="ActionInput__button"
                 siblingOn={ this.buttonSiblingOn }
                 onClick={ this.onClick }>{ actionTitle }</Button>
-        }
       </div>
     );
   }
@@ -76,7 +64,7 @@ class ActionInput extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     placeholder: PropTypes.string,
-    actionTitle: PropTypes.string,
+    actionTitle: PropTypes.string.isRequired,
     onAct: PropTypes.func.isRequired,
   }
 }

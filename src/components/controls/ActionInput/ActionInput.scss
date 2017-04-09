@@ -13,10 +13,7 @@
     @include form-element-padding;
     @include form-element-states;
     @include form-element-default;
-
-    &--has-button {
-      @include form-element-sibling-on-right;
-    }
+    @include form-element-sibling-on-right;
   }
 
   &__button {
