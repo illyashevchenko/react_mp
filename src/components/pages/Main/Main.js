@@ -20,8 +20,6 @@ class Main extends PureComponent {
     );
   }
 
-  completedList = filter(prop('done'));
-
   createTodoList() {
     const { tasks, category, setTasks: set } = this.props;
     return (
@@ -32,6 +30,8 @@ class Main extends PureComponent {
         actions={ { set } }/>
     );
   }
+
+  completedList = filter(prop('done'));
 
   getCompleted() {
     const completed = this.completedList(this.props.tasks).length;

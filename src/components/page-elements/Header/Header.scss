@@ -1,4 +1,14 @@
 .Header {
+  display: flex;
+  align-items: center;
+
+  &__heading {
+    flex: 1;
+  }
+
+  &__tools {
+    flex: 0;
+  }
 
   &--old {
     background-color: #222;
