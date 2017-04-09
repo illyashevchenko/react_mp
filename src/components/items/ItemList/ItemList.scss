@@ -3,5 +3,9 @@
 
   &__item {
     margin-top: 3px;
+
+    > .ItemList {
+      margin-left: 10px;
+    }
   }
 }

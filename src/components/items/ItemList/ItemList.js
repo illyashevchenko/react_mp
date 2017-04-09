@@ -5,15 +5,25 @@ import './ItemList.css';
 
 const key = useWith(path, [split('.'), identity]);
 
-const createItem = curry(function ({ Element, keyPath, actions = {}, active }, item) {
+const onClick = (select, item) =>
+select && ((event) => {
+  select(item);
+  event.stopPropagation();
+});
+
+const createItem = curry(function (props, item) {
+  const { Element, keyPath, actions = {}, active } = props;
   return <div
     className="ItemList__item"
     key={ key(keyPath, item) }
-    onClick={ actions.select && actions.select.bind(null, item) }>
+    onClick={ onClick(actions.select, item) }>
     {
       <Element item={ item }
                actions={ actions }
                isActive={ active === item }/>
+    }
+    {
+      item.nested && <ItemsList { ...props } list={ item.nested }/>
     }
   </div>
 });

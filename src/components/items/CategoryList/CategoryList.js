@@ -5,6 +5,9 @@ import ItemList from '../ItemList/ItemList.js';
 import Category from '../Category/Category.js';
 import ActionInput from '../../controls/ActionInput/ActionInput.js';
 
+import actions from './actions';
+const { getTree } = actions;
+
 class CategoryList extends PureComponent {
   constructor(props) {
     super(props);
@@ -39,6 +42,9 @@ class CategoryList extends PureComponent {
 
   render() {
     const { categories, active, actions: { select } } = this.props;
+
+    this.categoryActions.select = this.categoryActions.select || select;
+
     return <div className="CategoryList">
       <ActionInput
         className="CategoryList__input"
@@ -47,9 +53,9 @@ class CategoryList extends PureComponent {
         onAct={ this.add }/>
       <ItemList
         className="CategoryList__list"
-        list={ categories }
+        list={ getTree(categories) }
         active={ active }
-        actions={ { ...this.categoryActions, select } }
+        actions={ this.categoryActions }
         Element={ Category }
         keyPath="id"/>
     </div>;
