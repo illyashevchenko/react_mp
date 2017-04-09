@@ -14,14 +14,30 @@
 
   &--small {
     padding: 5px;
+
+    .Item__actions:not(:last-child) {
+      margin-right: 2px;
+    }
   }
 
   &--large {
     padding: 15px;
+
+    .Item__actions:not(:last-child) {
+      margin-right: 4px;
+    }
   }
 
   &--active {
     background-color: $light-blue;
+  }
+
+  &__button {
+    visibility: hidden;
+  }
+
+  &:hover &__button {
+    visibility: visible;
   }
 
   $padding-section: 10px;

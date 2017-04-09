@@ -6,11 +6,12 @@ const baseClass = 'Button';
 const getSiblingOnClass = (siblingOn) =>
   siblingOn.map((type) => `${ baseClass }--sibling-on-${ type }`);
 
-const getClass = ({ type = 'default', siblingOn = [], size = 'normal' }) =>
+const getClass = ({ type = 'default', siblingOn = [], size = 'normal', className }) =>
   [
     baseClass,
     `${ baseClass }--${ type }`,
     `${ baseClass }--${ size }`,
+    className,
   ]
     .concat(getSiblingOnClass(siblingOn))
     .join(' ');

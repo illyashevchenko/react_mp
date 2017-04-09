@@ -14,6 +14,7 @@ const ToDo = (props) => (
     <span className="Item__main">{ props.item.title }</span>
     <span className="Item__actions">
       <IconButton
+        className="Item__button"
         name="edit"
         onClick={ () => ({}) }/>
     </span>
