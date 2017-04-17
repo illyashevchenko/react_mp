@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Pure from '../../HOC/Pure/Pure';
 import './ProgressBar.css';
 
 const styles = {};
@@ -18,4 +19,4 @@ ProgressBar.PropTypes = {
   complete: PropTypes.number.isRequired,
 };
 
-export default ProgressBar;
+export default Pure(ProgressBar);

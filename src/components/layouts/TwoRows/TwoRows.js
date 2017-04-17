@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Pure from '../../HOC/Pure/Pure';
 import './TwoRows.css';
 
 function TwoRows({ left, right, className }) {
@@ -18,4 +19,4 @@ TwoRows.propTypes = {
   right: PropTypes.element,
 };
 
-export default TwoRows;
+export default Pure(TwoRows);

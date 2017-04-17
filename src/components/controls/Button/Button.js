@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Pure from '../../HOC/Pure/Pure';
 import './Button.css';
 
 const baseClass = 'Button';
@@ -27,4 +28,4 @@ Button.propTypes = {
   siblingOn: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default Button;
+export default Pure(Button);

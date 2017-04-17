@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Pure from '../../HOC/Pure/Pure';
 import './ToDoFilter.css';
 
 // TODO: refactor this
@@ -36,4 +37,4 @@ ToDoFilter.PropTypes = {
   }),
 };
 
-export default ToDoFilter;
+export default Pure(ToDoFilter);

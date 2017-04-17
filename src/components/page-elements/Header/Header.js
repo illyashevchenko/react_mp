@@ -1,4 +1,5 @@
 import React from 'react';
+import Pure from '../../HOC/Pure/Pure';
 import './Header.css';
 
 function Header(props) {
@@ -10,4 +11,4 @@ function Header(props) {
   );
 }
 
-export default Header;
+export default Pure(Header);
