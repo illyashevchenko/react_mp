@@ -15,6 +15,7 @@ class CategoryList extends PureComponent {
     this.add = this.add.bind(this);
     this.categoryActions = {
       remove: this.remove.bind(this),
+      addNested: this.addNested.bind(this),
       edit: this.edit.bind(this),
     }
   }
@@ -32,12 +33,16 @@ class CategoryList extends PureComponent {
     ]);
   }
 
-  remove() {
-
+  remove(item) {
+    console.log('remove ', item);
   }
 
-  edit() {
+  addNested(item) {
+    console.log('add nested to ', item);
+  }
 
+  edit(item) {
+    console.log('edit', item);
   }
 
   render() {

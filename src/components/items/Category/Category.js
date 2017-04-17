@@ -4,9 +4,14 @@ import './Category.css';
 import Item from '../Item/Item.js';
 import IconButton from '../../controls/IconButton/IconButton.js';
 
-const edit = () => ({});
-const add = () => ({});
+const getAction = (action, { actions, item }) =>
+  () => actions[action](item);
 
+/**
+ *
+ * @param { { item: { title: string }, actions: { [string]: function }} } props
+ * @constructor
+ */
 const Category = (props) => (
   <Item size="small" { ...props }>
     <span className="Item__section"/>
@@ -15,17 +20,17 @@ const Category = (props) => (
       <IconButton className="Item__button"
                   name="edit"
                   size="small"
-                  onClick={ add }/>
+                  onClick={ getAction('edit', props) }/>
       </span>
     <span className="Item__actions">
       <IconButton className="Item__button"
                   name="remove"
                   size="small"
-                  onClick={ edit }/>
+                  onClick={ getAction('remove', props) }/>
       <IconButton className="Item__button"
                   name="add"
                   size="small"
-                  onClick={ edit }/>
+                  onClick={ getAction('addNested', props) }/>
     </span>
   </Item>
 );
