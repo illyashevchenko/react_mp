@@ -34,8 +34,13 @@ class Main extends PureComponent {
 
   removeCategory(category) {
     const { categories, tasks, setCategories, setTasks } = this.props;
-    const newCategories = actions.removeCategory(categories, category);
-    const newTasks = actions.removeTaskByCategory(tasks, category.id);
+
+    const toRemove = actions.idsToRemove(category.id, categories);
+
+    const cleanedCategories = actions.removeByIds(toRemove, categories);
+    const newCategories = actions.removeFromParent(category.id, cleanedCategories);
+
+    const newTasks = actions.removeCategoriesTasks(toRemove, tasks);
 
     setCategories(newCategories);
     setTasks(newTasks);

@@ -14,13 +14,8 @@ const createNestedIds = pipe(
 
 
 const setNested = (keysMap) => {
-  let counter = 0;
   const add = (item) => {
     let nested;
-
-    if (++counter > 100) {
-      return;
-    }
 
     if (item.subIds) {
       nested = item.subIds
@@ -36,11 +31,6 @@ const setNested = (keysMap) => {
 
 const getTree = (list) => {
   const nestedIds = createNestedIds(list);
-
-  if (!nestedIds.length) {
-    return list;
-  }
-
   const topLevel = list.filter((item) => nestedIds.indexOf(item.id) === -1);
   const keysMap = createKeysMap(list);
 
