@@ -2,7 +2,6 @@ import React, { PureComponent, PropTypes } from 'react';
 import './Main.css';
 
 import actions from './actions.js';
-const { completedPercentage } = actions;
 
 import Header from '../../page-elements/Header/Header.js';
 import ProgressBar from '../../page-elements/ProgressBar/ProgressBar.js';
@@ -19,6 +18,27 @@ class Main extends PureComponent {
     this.filterActions = {
       set: this.setFilter.bind(this),
     };
+
+    const { setCategories, selectCategory, setTasks } = props;
+
+    this.categoriesActions = {
+      set: setCategories,
+      select: selectCategory,
+      remove: this.removeCategory.bind(this),
+    };
+
+    this.todoActions = {
+      set: setTasks,
+    };
+  }
+
+  removeCategory(category) {
+    const { categories, tasks, setCategories, setTasks } = this.props;
+    const newCategories = actions.removeCategory(categories, category);
+    const newTasks = actions.removeTaskByCategory(tasks, category.id);
+
+    setCategories(newCategories);
+    setTasks(newTasks);
   }
 
   setFilter(filter) {
@@ -26,12 +46,7 @@ class Main extends PureComponent {
   }
 
   createCategoryList() {
-    const { categories, category, setCategories, selectCategory } = this.props;
-    this.categoriesActions = this.categoriesActions ||
-      {
-        set: setCategories,
-        select: selectCategory,
-      };
+    const { categories, category } = this.props;
 
     return (
       <CategoryList
@@ -42,11 +57,7 @@ class Main extends PureComponent {
   }
 
   createTodoList() {
-    const { tasks, category, setTasks } = this.props;
-    this.todoActions = this.todoActions ||
-      {
-        set: setTasks,
-      };
+    const { tasks, category } = this.props;
 
     return (
       <TodoList
@@ -66,7 +77,7 @@ class Main extends PureComponent {
               filter={ this.state.filter }
               actions={ this.filterActions }/>
           </Header>
-          <ProgressBar complete={ completedPercentage(this.props.tasks)}/>
+          <ProgressBar complete={ actions.completedPercentage(this.props.tasks)}/>
         </div>
         <TwoRows
           className="page__section-flexible"

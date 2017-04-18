@@ -1,4 +1,8 @@
-import { nthArg, pipe, prop, identity, filter, flatten, reduceBy, pluck, __, memoize } from 'ramda'
+import {
+  __, memoize, nthArg, pipe, flip, useWith, identity,
+  prepend, filter, flatten,
+  reduceBy, pluck, prop,
+} from 'ramda'
 
 const createKeysMap = reduceBy(nthArg(1), {}, (item) => item.id);
 
@@ -9,7 +13,7 @@ const createNestedIds = pipe(
 );
 
 
-const addNested = (keysMap) => {
+const setNested = (keysMap) => {
   let counter = 0;
   const add = (item) => {
     let nested;
@@ -40,8 +44,18 @@ const getTree = (list) => {
   const topLevel = list.filter((item) => nestedIds.indexOf(item.id) === -1);
   const keysMap = createKeysMap(list);
 
-  return topLevel.map(addNested(keysMap));
+  return topLevel.map(setNested(keysMap));
 };
 
 
-export default { getTree: memoize(getTree) };
+const createCategory = (title) => ({
+  title,
+  id: Date.now(),
+});
+
+const addCategory = useWith(prepend, [createCategory, identity]);
+
+export default {
+  getTree: memoize(getTree),
+  addCategory: flip(addCategory),
+};

@@ -13,7 +13,7 @@ class CategoryList extends PureComponent {
 
     this.add = this.add.bind(this);
     this.categoryActions = {
-      remove: this.remove.bind(this),
+      remove: props.actions.remove,
       addNested: this.addNested.bind(this),
       edit: this.edit.bind(this),
     }
@@ -24,16 +24,9 @@ class CategoryList extends PureComponent {
       return;
     }
 
-    const categories = this.props.categories;
-
-    this.props.actions.set([
-      { title, id: Date.now() },
-      ...categories,
-    ]);
-  }
-
-  remove(item) {
-    console.log('remove ', item);
+    this.props.actions.set(
+      actions.addCategory(this.props.categories, title)
+    );
   }
 
   addNested(item) {
@@ -72,6 +65,7 @@ CategoryList.propTypes = {
   actions: PropTypes.shape({
     set: PropTypes.func.isRequired,
     select: PropTypes.func.isRequired,
+    remove: PropTypes.func.isRequired,
   }),
 };
 
