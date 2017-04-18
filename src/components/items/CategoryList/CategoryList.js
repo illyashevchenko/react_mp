@@ -6,7 +6,6 @@ import Category from '../Category/Category.js';
 import ActionInput from '../../controls/ActionInput/ActionInput.js';
 
 import actions from './actions';
-const { getTree } = actions;
 
 class CategoryList extends PureComponent {
   constructor(props) {
@@ -58,7 +57,7 @@ class CategoryList extends PureComponent {
         onAct={ this.add }/>
       <ItemList
         className="CategoryList__list"
-        list={ getTree(categories) }
+        list={ actions.getTree(categories) }
         active={ active }
         actions={ this.categoryActions }
         Element={ Category }

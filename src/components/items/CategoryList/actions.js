@@ -1,4 +1,4 @@
-import { nthArg, pipe, prop, identity, filter, flatten, reduceBy, pluck, __ } from 'ramda'
+import { nthArg, pipe, prop, identity, filter, flatten, reduceBy, pluck, __, memoize } from 'ramda'
 
 const createKeysMap = reduceBy(nthArg(1), {}, (item) => item.id);
 
@@ -44,4 +44,4 @@ const getTree = (list) => {
 };
 
 
-export default { getTree };
+export default { getTree: memoize(getTree) };
