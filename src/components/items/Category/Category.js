@@ -3,6 +3,7 @@ import './Category.css';
 
 import Item from '../Item';
 import IconButton from '../../controls/IconButton';
+import Pure from '../../HOC/Pure';
 
 const getAction = (action, { actions, item }) =>
   () => actions[action](item);
@@ -35,4 +36,4 @@ const Category = (props) => (
   </Item>
 );
 
-export default Category;
+export default Pure(Category);

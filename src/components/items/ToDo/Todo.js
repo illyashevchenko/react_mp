@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import './Todo.css';
 
+import Pure from '../../HOC/Pure';
+
 import Item from '../Item';
 import IconButton from '../../controls/IconButton';
 
@@ -31,4 +33,4 @@ ToDo.propTypes = {
   }),
 };
 
-export default ToDo;
+export default Pure(ToDo);

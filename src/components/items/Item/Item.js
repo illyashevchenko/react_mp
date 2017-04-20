@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import './Item.css';
 
+import Pure from '../../HOC/Pure';
+
 const baseClass = 'Item';
 
 const getClass = ({ size = 'small', isActive }) =>
@@ -25,4 +27,4 @@ Item.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   isActive: PropTypes.bool,
 };
-export default Item;
+export default Pure(Item);
