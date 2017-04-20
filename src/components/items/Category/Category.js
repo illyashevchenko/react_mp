@@ -21,7 +21,7 @@ const Category = (props) => (
                   name="edit"
                   size="small"
                   onClick={ getAction('edit', props) }/>
-      </span>
+    </span>
     <span className="Item__actions">
       <IconButton className="Item__button"
                   name="remove"

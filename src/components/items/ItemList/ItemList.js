@@ -1,4 +1,6 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+
 import { path, split, useWith, identity, memoize } from 'ramda';
 
 import './ItemList.css';

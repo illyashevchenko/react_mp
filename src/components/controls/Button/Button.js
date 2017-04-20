@@ -1,6 +1,9 @@
-import React, { PropTypes } from 'react';
-import Pure from '../../HOC/Pure';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import './Button.css';
+
+import Pure from '../../HOC/Pure';
 
 const baseClass = 'Button';
 

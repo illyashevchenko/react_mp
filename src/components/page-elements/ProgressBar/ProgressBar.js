@@ -1,6 +1,9 @@
-import React, { PropTypes } from 'react';
-import Pure from '../../HOC/Pure';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import './ProgressBar.css';
+
+import Pure from '../../HOC/Pure';
 
 const styles = {};
 const getWidth = (complete) => `${ complete }%`;

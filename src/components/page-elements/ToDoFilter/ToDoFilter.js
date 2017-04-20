@@ -1,6 +1,9 @@
-import React, { PropTypes } from 'react';
-import Pure from '../../HOC/Pure';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import './ToDoFilter.css';
+
+import Pure from '../../HOC/Pure';
 
 // TODO: refactor this
 const setItem = (set, filter, prop, eventProp) => // eslint-disable-line max-params

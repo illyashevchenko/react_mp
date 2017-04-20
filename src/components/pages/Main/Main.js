@@ -1,4 +1,6 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+
 import './Main.css';
 
 import actions from './actions';
@@ -75,7 +77,7 @@ class Main extends PureComponent {
 
   render() {
     return (
-      <div className="Main page">
+      <div className="page-Main page">
         <div className="page__section-static">
           <Header text="To-Do List">
             <ToDoFilter
