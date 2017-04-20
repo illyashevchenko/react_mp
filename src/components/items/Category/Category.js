@@ -1,8 +1,8 @@
 import React from 'react';
 import './Category.css';
 
-import Item from '../Item/Item.js';
-import IconButton from '../../controls/IconButton/IconButton.js';
+import Item from '../Item';
+import IconButton from '../../controls/IconButton';
 
 const getAction = (action, { actions, item }) =>
   () => actions[action](item);

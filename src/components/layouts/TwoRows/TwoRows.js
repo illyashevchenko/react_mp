@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Pure from '../../HOC/Pure/Pure';
+import Pure from '../../HOC/Pure';
 import './TwoRows.css';
 
 function TwoRows({ left, right, className }) {

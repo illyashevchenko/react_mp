@@ -1,9 +1,9 @@
 import React, { PureComponent, PropTypes } from 'react';
 import './CategoryList.css';
 
-import ItemList from '../ItemList/ItemList.js';
-import Category from '../Category/Category.js';
-import ActionInput from '../../controls/ActionInput/ActionInput.js';
+import ItemList from '../ItemList';
+import Category from '../Category';
+import ActionInput from '../../controls/ActionInput';
 
 import actions from './actions';
 

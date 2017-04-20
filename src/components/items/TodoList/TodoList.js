@@ -1,9 +1,9 @@
 import React, { PureComponent, PropTypes } from 'react';
 import './TodoList.css';
 
-import ItemList from '../ItemList/ItemList.js';
-import ToDo from '../ToDo/Todo.js';
-import ActionInput from '../../controls/ActionInput/ActionInput.js';
+import ItemList from '../ItemList';
+import ToDo from '../ToDo';
+import ActionInput from '../../controls/ActionInput';
 
 import actions from './actions';
 const { filtered, create, toggleDone } = actions;

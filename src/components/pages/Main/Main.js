@@ -1,14 +1,14 @@
 import React, { PureComponent, PropTypes } from 'react';
 import './Main.css';
 
-import actions from './actions.js';
+import actions from './actions';
 
-import Header from '../../page-elements/Header/Header.js';
-import ProgressBar from '../../page-elements/ProgressBar/ProgressBar.js';
-import ToDoFilter from '../../page-elements/ToDoFilter/ToDoFilter.js';
-import CategoryList from '../../items/CategoryList/CategoryList.js';
-import TodoList from '../../items/TodoList/TodoList.js';
-import TwoRows from '../../layouts/TwoRows/TwoRows.js';
+import Header from '../../page-elements/Header';
+import ProgressBar from '../../page-elements/ProgressBar';
+import ToDoFilter from '../../page-elements/ToDoFilter';
+import CategoryList from '../../items/CategoryList';
+import TodoList from '../../items/TodoList';
+import TwoRows from '../../layouts/TwoRows';
 
 class Main extends PureComponent {
   constructor(props) {

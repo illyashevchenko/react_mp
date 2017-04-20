@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import './IconButton.css';
 
-import Icon from '../Icon/Icon.js';
-import Button from '../Button/Button.js';
+import Icon from '../Icon';
+import Button from '../Button';
 
 const createClicker = (onClick) =>
   (event) => {

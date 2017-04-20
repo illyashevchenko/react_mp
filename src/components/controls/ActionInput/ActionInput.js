@@ -1,7 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import './ActionInput.css';
 
-import Button from '../Button/Button.js'
+import Button from '../Button'
 
 class ActionInput extends PureComponent {
   constructor(props) {

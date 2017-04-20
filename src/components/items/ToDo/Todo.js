@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import './Todo.css';
 
-import Item from '../Item/Item.js';
-import IconButton from '../../controls/IconButton/IconButton.js';
+import Item from '../Item';
+import IconButton from '../../controls/IconButton';
 
 const ToDo = (props) => (
   <Item size="large" { ...props }>

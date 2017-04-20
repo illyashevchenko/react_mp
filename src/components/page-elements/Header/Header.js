@@ -1,5 +1,5 @@
 import React from 'react';
-import Pure from '../../HOC/Pure/Pure';
+import Pure from '../../HOC/Pure';
 import './Header.css';
 
 function Header(props) {
