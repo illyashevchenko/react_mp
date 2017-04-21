@@ -48,7 +48,8 @@ class ItemsList extends PureComponent {
   }
 
   render() {
-    return this.createList(this.props.list);
+    const { Element, active, list } = this.props;
+    return this.createList(list, Element, active);// for memoization
   }
 }
 
