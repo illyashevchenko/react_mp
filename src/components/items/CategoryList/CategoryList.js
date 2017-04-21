@@ -18,7 +18,6 @@ class CategoryList extends PureComponent {
       remove: props.actions.remove,
       select: props.actions.select,
       addNested: this.addNested.bind(this),
-      edit: this.edit.bind(this),
       confirm: this.confirm.bind(this),
       cancel: this.cancel.bind(this),
     }
@@ -34,24 +33,16 @@ class CategoryList extends PureComponent {
     set(actions.addCategory(categories, title));
   }
 
-  confirm() {
-
+  confirm(item, title) {
+    console.log('Confirmed in list: ', item, '. New title: ', title);
   }
 
-  cancel() {
-
+  cancel(item) {
+    console.log('Cancelled in list: ', item);
   }
 
   addNested(item) {
     console.log('add nested to ', item);
-  }
-
-  edit(item) {
-    const { categories, actions: { set } } = this.props;
-
-    set(
-      actions.modifyCategory(categories, item, { inEdit: true })
-    );
   }
 
   render() {
