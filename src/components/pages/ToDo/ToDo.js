@@ -33,7 +33,7 @@ class Main extends PureComponent {
         <TwoRows
           className="page__section-flexible"
           left={ this.createCategoryList() }
-          right={ <div>Here will be a form for: </div> }/>
+          right={ <div>Here will be a form for: { this.props.match.params.taskId }</div> }/>
       </div>
     );
   }
