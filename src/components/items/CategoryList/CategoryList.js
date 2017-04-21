@@ -16,8 +16,11 @@ class CategoryList extends PureComponent {
     this.add = this.add.bind(this);
     this.categoryActions = {
       remove: props.actions.remove,
+      select: props.actions.select,
       addNested: this.addNested.bind(this),
       edit: this.edit.bind(this),
+      confirm: this.confirm.bind(this),
+      cancel: this.cancel.bind(this),
     }
   }
 
@@ -26,9 +29,17 @@ class CategoryList extends PureComponent {
       return;
     }
 
-    this.props.actions.set(
-      actions.addCategory(this.props.categories, title)
-    );
+    const { categories, actions: { set } } = this.props;
+
+    set(actions.addCategory(categories, title));
+  }
+
+  confirm() {
+
+  }
+
+  cancel() {
+
   }
 
   addNested(item) {
@@ -36,13 +47,15 @@ class CategoryList extends PureComponent {
   }
 
   edit(item) {
-    console.log('edit', item);
+    const { categories, actions: { set } } = this.props;
+
+    set(
+      actions.modifyCategory(categories, item, { inEdit: true })
+    );
   }
 
   render() {
-    const { categories, active, actions: { select } } = this.props;
-
-    this.categoryActions.select = this.categoryActions.select || select;
+    const { categories, active } = this.props;
 
     return <div className="CategoryList">
       <ActionInput
@@ -65,9 +78,9 @@ CategoryList.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
   active: PropTypes.object,
   actions: PropTypes.shape({
-    set: PropTypes.func.isRequired,
-    select: PropTypes.func.isRequired,
-    remove: PropTypes.func.isRequired,
+    set: PropTypes.func,
+    select: PropTypes.func,
+    remove: PropTypes.func,
   }),
 };
 

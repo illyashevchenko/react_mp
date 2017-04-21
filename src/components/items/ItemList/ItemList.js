@@ -7,12 +7,6 @@ import './ItemList.css';
 
 const key = useWith(path, [split('.'), identity]);
 
-const onClick = (select, item) =>
-select && ((event) => {
-  select(item);
-  event.stopPropagation();
-});
-
 class ItemsList extends PureComponent {
   constructor(props) {
     super(props);
@@ -26,8 +20,7 @@ class ItemsList extends PureComponent {
 
     return <div
       className="ItemList__item"
-      key={ key(keyPath, item) }
-      onClick={ onClick(actions.select, item) }>
+      key={ key(keyPath, item) }>
       {
         <Element item={ item }
                  actions={ actions }
@@ -48,7 +41,7 @@ class ItemsList extends PureComponent {
   }
 
   render() {
-    const { Element, active, list } = this.props;
+    const { list, Element, active } = this.props;
     return this.createList(list, Element, active);// for memoization
   }
 }
@@ -58,9 +51,7 @@ ItemsList.propTypes = {
   Element: PropTypes.func.isRequired,
   keyPath: PropTypes.string.isRequired,
   active: PropTypes.object,
-  actions: PropTypes.shape({
-    select: PropTypes.func,
-  }),
+  actions: PropTypes.object,
   className: PropTypes.string,
 };
 

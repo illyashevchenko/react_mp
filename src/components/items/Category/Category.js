@@ -1,12 +1,40 @@
 import React from 'react';
 import './Category.css';
 
-import Item from '../Item';
-import IconButton from '../../controls/IconButton';
 import Pure from '../../HOC/Pure';
+import CategoryBase from './CategoryBase';
 
-const getAction = (action, { actions, item }) =>
-  () => actions[action](item);
+const viewAble = {
+  buttons: {
+    title: [
+      { name: 'edit', action: 'edit' },
+    ],
+    tools: [
+      { name: 'remove', action: 'remove' },
+      { name: 'add', action: 'addNested' },
+    ],
+  },
+};
+
+const getViewable = (props) => Object.assign({}, props, viewAble);
+
+const editAble = {
+  getTitle(props) {
+    return (
+      <input
+        style={ { width: '100%' } }
+        value={ props.item.title }/>
+    );
+  },
+  buttons: {
+    tools: [
+      { name: 'checked', action: 'confirm' },
+      { name: 'cancel', action: 'cancel' },
+    ],
+  },
+};
+
+const getEditable = (props) => Object.assign({}, props, editAble);
 
 /**
  *
@@ -14,26 +42,9 @@ const getAction = (action, { actions, item }) =>
  * @constructor
  */
 const Category = (props) => (
-  <Item size="small" { ...props }>
-    <span className="Item__section"/>
-    <span className="Item__main">
-      <span className="Item__section">{ props.item.title }</span>
-      <IconButton className="Item__button"
-                  name="edit"
-                  size="small"
-                  onClick={ getAction('edit', props) }/>
-    </span>
-    <span className="Item__actions">
-      <IconButton className="Item__button"
-                  name="remove"
-                  size="small"
-                  onClick={ getAction('remove', props) }/>
-      <IconButton className="Item__button"
-                  name="add"
-                  size="small"
-                  onClick={ getAction('addNested', props) }/>
-    </span>
-  </Item>
+  props.item.inEdit
+    ? CategoryBase(getEditable(props))
+    : CategoryBase(getViewable(props))
 );
 
 export default Pure(Category);

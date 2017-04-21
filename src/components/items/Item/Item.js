@@ -7,6 +7,12 @@ import Pure from '../../HOC/Pure';
 
 const baseClass = 'Item';
 
+const onClick = (select, item) =>
+select && ((event) => {
+  select(item);
+  event.stopPropagation();
+});
+
 const getClass = ({ size = 'small', isActive }) =>
   [
     baseClass,
@@ -16,7 +22,8 @@ const getClass = ({ size = 'small', isActive }) =>
 
 const Item = (props) => (
   <div
-    className={ getClass(props) }>
+    className={ getClass(props) }
+    onClick={ onClick(props.actions.select, props.item) }>
     { props.children }
   </div>
 );
@@ -26,5 +33,8 @@ Item.propTypes = {
   size: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   isActive: PropTypes.bool,
+  actions: PropTypes.shape({
+    select: PropTypes.func,
+  }),
 };
 export default Pure(Item);
