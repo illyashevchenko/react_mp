@@ -1,8 +1,10 @@
-import {
-  __, memoize, nthArg, pipe, flip, useWith, identity,
-  prepend, filter, flatten,
+import ramda from 'ramda'
+
+const {
+  __, memoize, nthArg, pipe, flip, identity,
+  filter, flatten,
   reduceBy, pluck, prop,
-} from 'ramda'
+} = ramda;
 
 const createKeysMap = reduceBy(nthArg(1), {}, (item) => item.id);
 
@@ -43,9 +45,22 @@ const createCategory = (title) => ({
   id: Date.now(),
 });
 
+const { useWith, prepend } = ramda;
 const addCategory = useWith(prepend, [createCategory, identity]);
+
+const { merge, update } = ramda;
+
+const modifyCategory = (list, item, changes) => {
+  const index = list.indexOf(item);
+
+  return update(index,
+    merge(item, changes),
+    list
+  )
+};
 
 export default {
   getTree: memoize(getTree),
   addCategory: flip(addCategory),
+  modifyCategory,
 };
