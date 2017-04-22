@@ -30,19 +30,27 @@ class CategoryList extends PureComponent {
 
     const { categories, actions: { set } } = this.props;
 
-    set(actions.addCategory(categories, title));
+    set(actions.addCategory(title, categories));
   }
 
   confirm(item, title) {
-    console.log('Confirmed in list: ', item, '. New title: ', title);
+    const { categories, actions: { set } } = this.props;
+
+    set(
+      actions.modifyCategory(categories, item, { title })
+    );
   }
 
   cancel(item) {
     console.log('Cancelled in list: ', item);
   }
 
-  addNested(item) {
-    console.log('add nested to ', item);
+  addNested(parent) {
+    const { categories, actions: { set } } = this.props;
+
+    set(
+      actions.addNested(parent, categories)
+    );
   }
 
   render() {

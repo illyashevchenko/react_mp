@@ -14,6 +14,7 @@ class Category extends PureComponent {
       actions: {
         confirm: this.confirm.bind(this),
         cancel: this.cancel.bind(this),
+        select: null,
       },
     });
 
@@ -27,7 +28,7 @@ class Category extends PureComponent {
 
     this.state = {
       title: props.item.title,
-      inEdit: false,
+      inEdit: props.item.isNew,
     };
   }
 
@@ -55,6 +56,7 @@ class Category extends PureComponent {
   getTitle() {
     return (
       <input
+        type="text"
         style={ { width: '100%' } }
         value={ this.state.title }
         onChange={ this.onTitleChange }/>
@@ -70,7 +72,12 @@ class Category extends PureComponent {
   }
 
   confirm(item) {
-    this.props.actions.confirm(item, this.state.title);
+    const title = this.state.title;
+    if (!title) {
+      return;
+    }
+
+    this.props.actions.confirm(item, title);
     this.endEdit();
   }
 

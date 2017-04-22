@@ -1,12 +1,8 @@
-import ramda from 'ramda'
+import Ramda from 'ramda'
 
-const {
-  __, memoize, nthArg, pipe, flip, identity,
-  filter, flatten,
-  reduceBy, pluck, prop,
-} = ramda;
+const { nthArg, pipe, identity, filter, flatten, reduceBy, pluck, prop } = Ramda;
 
-const createKeysMap = reduceBy(nthArg(1), {}, (item) => item.id);
+const createKeysMap = reduceBy(nthArg(1), {}, prop('id'));
 
 const createNestedIds = pipe(
   pluck('subIds'),
@@ -14,6 +10,7 @@ const createNestedIds = pipe(
   flatten
 );
 
+const { __ } = Ramda;
 
 const setNested = (keysMap) => {
   const add = (item) => {
@@ -45,22 +42,47 @@ const createCategory = (title) => ({
   id: Date.now(),
 });
 
-const { useWith, prepend } = ramda;
+const { useWith, prepend } = Ramda;
 const addCategory = useWith(prepend, [createCategory, identity]);
 
-const { merge, update } = ramda;
+const createCategoryWithoutTitle = () => ({
+  title: '',
+  id: Date.now(),
+  isNew: true,
+});
 
-const modifyCategory = (list, item, changes) => {
-  const index = list.indexOf(item);
 
-  return update(index,
-    merge(item, changes),
-    list
-  )
+const { append, over, lensProp, findIndex, equals, adjust } = Ramda;
+
+const addSubId = pipe(
+  prepend,
+  over(lensProp('subIds'))
+);
+
+const addNested = (parent, list) => {
+  const index = findIndex(equals(parent), list);
+  const item = createCategoryWithoutTitle();
+
+  const newList = adjust(addSubId(item.id), index, list);
+
+  return append(item, newList);
 };
+
+
+const { merge, update } = Ramda;
+
+const modifyCategory = (list, item, changes) =>
+  update(
+    findIndex(equals(item), list),
+    merge(item, merge(changes, { isNew: null })),
+    list
+  );
+
+const { memoize } = Ramda;
 
 export default {
   getTree: memoize(getTree),
-  addCategory: flip(addCategory),
+  addCategory,
+  addNested,
   modifyCategory,
 };
