@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton } from '../../controls/IconButton';
 
-import { map, memoize } from 'ramda';
+import { map } from 'ramda';
 
 const getButton = (button) =>
   <IconButton
@@ -11,4 +11,4 @@ const getButton = (button) =>
     key={ button.name }
     onClick={ button.action }/>;
 
-export const getButtons = memoize(map(getButton));
+export const getButtons = map(getButton);

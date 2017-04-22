@@ -40,11 +40,11 @@ export class Category extends PureComponent {
   }
 
   getViewToolButtons() {
-    const { actions } = this.props;
+    const { actions, item } = this.props;
 
     return getButtons([
-      { name: 'remove', action: actions.remove },
-      { name: 'add', action: actions.addNested },
+      { name: 'remove', action: actions.remove.bind(null, item) },
+      { name: 'add', action: actions.addNested.bind(null, item) },
     ]);
   }
 
@@ -79,24 +79,6 @@ export class Category extends PureComponent {
     this.endEdit();
   }
 
-  onTitleChange(event) {
-    this.setState({
-      title: event.target.value,
-    });
-  }
-
-  getEditBody() {
-    return (
-      <ItemMain>
-        <input
-          type="text"
-          style={ { width: '100%' } }
-          value={ this.state.title }
-          onChange={ this.onTitleChange }/>
-      </ItemMain>
-    );
-  }
-
   getViewBody() {
     return (
       <ItemMain>
@@ -104,6 +86,24 @@ export class Category extends PureComponent {
         { this.getViewTitleButtons() }
       </ItemMain>
     );
+  }
+
+  getEditBody() {
+    return (
+      <ItemMain>
+        <input
+          className="Category-input"
+          type="text"
+          value={ this.state.title }
+          onChange={ this.onTitleChange }/>
+      </ItemMain>
+    );
+  }
+
+  onTitleChange(event) {
+    this.setState({
+      title: event.target.value,
+    });
   }
 
   render() {

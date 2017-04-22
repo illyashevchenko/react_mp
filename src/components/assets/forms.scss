@@ -9,6 +9,7 @@
 
   font-size: $font-middle;
   font-weight: $font-normal;
+  font-family: $main-font-family;
 }
 
 @mixin form-element-padding($size: 'middle') {
