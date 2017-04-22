@@ -1,25 +1,8 @@
 import React from 'react';
 import './Category.css';
 
-import { curry } from 'ramda';
-
-import { Item } from '../Item';
-import { IconButton } from '../../controls/IconButton';
-
-const getAction = (action, { actions, item }) =>
-  () => actions[action](item);
-
-const getButton = curry((props, button) =>
-  <IconButton
-    className="Item__button"
-    name={ button.name }
-    size="small"
-    key={ button.action }
-    onClick={ getAction(button.action, props) }/>
-);
-
-const getButtons = (props, buttons) =>
-  buttons.map(getButton(props));
+import { Item, ItemSection, ItemMain, ItemActions } from '../Item';
+import { getButtons } from './helpers';
 
 /**
  *
@@ -27,24 +10,24 @@ const getButtons = (props, buttons) =>
  * @constructor
  */
 export const CategoryBase = (props) => (
-  <Item size="small" { ...props }>
-    <span className="Item__section"/>
+  <Item { ...props }>
+    <ItemSection/>
     {
       props.getTitle
         ? (
-        <span className="Item__main">
+        <ItemMain>
           { props.getTitle(props) }
-        </span>
+        </ItemMain>
       )
         : (
-        <span className="Item__main">
-          <span className="Item__section">{ props.item.title }</span>
+        <ItemMain>
+          <ItemSection>{ props.item.title }</ItemSection>
           { getButtons(props, props.buttons.title) }
-        </span>
+        </ItemMain>
       )
     }
-    <span className="Item__actions">
+    <ItemActions>
       { getButtons(props, props.buttons.tools) }
-    </span>
+    </ItemActions>
   </Item>
 );

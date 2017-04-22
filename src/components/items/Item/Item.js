@@ -39,3 +39,27 @@ ItemRender.propTypes = {
 };
 
 export const Item = Pure(ItemRender);
+
+export const ItemSection = Pure(
+  (props) => (
+    <span className="Item__section">
+     { props.children }
+    </span>
+  )
+);
+
+export const ItemMain = Pure(
+  (props) => (
+    <span className="Item__main">
+     { props.children }
+    </span>
+  )
+);
+
+export const ItemActions = Pure(
+  (props) => (
+    <span className="Item__actions">
+      { props.children }
+    </span>
+  )
+);
