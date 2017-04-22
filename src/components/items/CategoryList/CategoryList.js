@@ -42,7 +42,11 @@ class CategoryList extends PureComponent {
   }
 
   cancel(item) {
-    console.log('Cancelled in list: ', item);
+    if (!actions.shouldRemove(item)) {
+      return;
+    }
+
+    this.props.actions.remove(item);
   }
 
   addNested(parent) {

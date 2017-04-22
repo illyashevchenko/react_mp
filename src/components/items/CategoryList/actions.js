@@ -68,6 +68,7 @@ const addNested = (parent, list) => {
   return append(item, newList);
 };
 
+const shouldRemove = prop('isNew');
 
 const { merge, update } = Ramda;
 
@@ -84,5 +85,6 @@ export default {
   getTree: memoize(getTree),
   addCategory,
   addNested,
+  shouldRemove,
   modifyCategory,
 };
