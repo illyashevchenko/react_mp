@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './Button.css';
 
-import Pure from '../../HOC/Pure';
+import { Pure } from '../../HOC/Pure';
 
 const baseClass = 'Button';
 
@@ -21,14 +21,14 @@ const getClass = ({ type = 'default', siblingOn = [], size = 'normal', className
     .join(' ');
 
 
-const Button = (props) =>
+const ButtonRender = (props) =>
   <button className={ getClass(props) }
           onClick={ props.onClick }>{ props.children }</button>;
 
-Button.propTypes = {
+ButtonRender.propTypes = {
   onClick: PropTypes.func.isRequired,
   type: PropTypes.string,
   siblingOn: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default Pure(Button);
+export const Button = Pure(ButtonRender);

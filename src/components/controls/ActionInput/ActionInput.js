@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import './ActionInput.css';
 
-import Button from '../Button'
+import { Button } from '../Button'
 
-class ActionInput extends PureComponent {
+export class ActionInput extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -70,5 +70,3 @@ class ActionInput extends PureComponent {
     onAct: PropTypes.func.isRequired,
   }
 }
-
-export default ActionInput;

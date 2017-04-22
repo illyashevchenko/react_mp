@@ -1,3 +1,1 @@
-import Component from './Category';
-
-export default Component;
+export * from './Category';

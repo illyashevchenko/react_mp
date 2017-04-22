@@ -1,3 +1,1 @@
-import Component from './ActionInput';
-
-export default Component;
+export * from './ActionInput';

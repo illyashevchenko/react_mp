@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './Item.css';
 
-import Pure from '../../HOC/Pure';
+import { Pure } from '../../HOC/Pure';
 
 const baseClass = 'Item';
 
@@ -20,7 +20,7 @@ const getClass = ({ size = 'small', isActive }) =>
     isActive ? `${ baseClass }--active` : '',
   ].join(' ');
 
-const Item = (props) => (
+const ItemRender = (props) => (
   <div
     className={ getClass(props) }
     onClick={ onClick(props.actions.select, props.item) }>
@@ -29,7 +29,7 @@ const Item = (props) => (
 );
 
 
-Item.propTypes = {
+ItemRender.propTypes = {
   size: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   isActive: PropTypes.bool,
@@ -37,4 +37,5 @@ Item.propTypes = {
     select: PropTypes.func,
   }),
 };
-export default Pure(Item);
+
+export const Item = Pure(ItemRender);

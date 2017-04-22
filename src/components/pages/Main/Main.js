@@ -5,14 +5,14 @@ import './Main.css';
 
 import actions from './actions';
 
-import Header from '../../page-elements/Header';
-import ProgressBar from '../../page-elements/ProgressBar';
-import ToDoFilter from '../../page-elements/ToDoFilter';
-import CategoryList from '../../items/CategoryList';
-import TodoList from '../../items/TodoList';
-import TwoRows from '../../layouts/TwoRows';
+import { Header } from '../../page-elements/Header';
+import { ProgressBar } from '../../page-elements/ProgressBar';
+import { ToDoFilter } from '../../page-elements/ToDoFilter';
+import { CategoryList } from '../../items/CategoryList';
+import { TodoList } from '../../items/TodoList';
+import { TwoRows } from '../../layouts/TwoRows';
 
-class Main extends PureComponent {
+export class MainPage extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -96,7 +96,7 @@ class Main extends PureComponent {
 }
 
 
-Main.propTypes = {
+MainPage.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
   category: PropTypes.object,
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -105,5 +105,3 @@ Main.propTypes = {
   selectCategory: PropTypes.func.isRequired,
   setTasks: PropTypes.func.isRequired,
 };
-
-export default Main;

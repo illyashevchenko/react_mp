@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 import './CategoryList.css';
 
-import ItemList from '../ItemList';
-import Category from '../Category';
-import ActionInput from '../../controls/ActionInput';
+import { ItemList } from '../ItemList';
+import { Category } from '../Category';
+import { ActionInput } from '../../controls/ActionInput';
 
 import actions from './actions';
 
-class CategoryList extends PureComponent {
+export class CategoryList extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -86,5 +86,3 @@ CategoryList.propTypes = {
     remove: PropTypes.func,
   }),
 };
-
-export default CategoryList;

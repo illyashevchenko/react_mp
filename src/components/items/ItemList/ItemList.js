@@ -7,7 +7,7 @@ import './ItemList.css';
 
 const key = useWith(path, [split('.'), identity]);
 
-class ItemsList extends PureComponent {
+export class ItemList extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -27,7 +27,7 @@ class ItemsList extends PureComponent {
                  isActive={ active === item }/>
       }
       {
-        item.nested && <ItemsList { ...this.props } list={ item.nested }/>
+        item.nested && <ItemList { ...this.props } list={ item.nested }/>
       }
     </div>
   }
@@ -46,7 +46,7 @@ class ItemsList extends PureComponent {
   }
 }
 
-ItemsList.propTypes = {
+ItemList.propTypes = {
   list: PropTypes.arrayOf(PropTypes.object).isRequired,
   Element: PropTypes.func.isRequired,
   keyPath: PropTypes.string.isRequired,
@@ -54,5 +54,3 @@ ItemsList.propTypes = {
   actions: PropTypes.object,
   className: PropTypes.string,
 };
-
-export default ItemsList;

@@ -3,9 +3,9 @@ import './Category.css';
 
 import { merge } from 'ramda';
 
-import CategoryBase from './CategoryBase';
+import { CategoryBase } from './CategoryBase';
 
-class Category extends PureComponent {
+export class Category extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -114,5 +114,3 @@ class Category extends PureComponent {
       : this.extendBase('view')
   }
 }
-
-export default Category;

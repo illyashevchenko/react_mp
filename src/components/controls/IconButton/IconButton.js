@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 
 import './IconButton.css';
 
-import Icon from '../Icon';
-import Button from '../Button';
+import { Icon } from '../Icon';
+import { Button } from '../Button';
+
+import { Pure } from '../../HOC/Pure';
+
 
 const createClicker = (onClick) =>
   (event) => {
@@ -12,16 +15,17 @@ const createClicker = (onClick) =>
     onClick(event)
   };
 
-const IconButton = (props) =>
+const IconButtonRender = (props) =>
   <Button type="default"
           { ...props }
           onClick={ createClicker(props.onClick) }>
     <Icon { ...props }/>
   </Button>;
 
-IconButton.propTypes = {
+IconButtonRender.propTypes = {
   onClick: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   size: PropTypes.string,
 };
-export default IconButton;
+
+export const IconButton = Pure(IconButtonRender);

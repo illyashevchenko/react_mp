@@ -1,3 +1,1 @@
-import Component from './Icon';
-
-export default Component;
+export * from './Icon';

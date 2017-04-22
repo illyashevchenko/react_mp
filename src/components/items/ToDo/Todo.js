@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import './Todo.css';
 
-import Pure from '../../HOC/Pure';
+import { Pure } from '../../HOC/Pure';
 
-import Item from '../Item';
-import IconButton from '../../controls/IconButton';
+import { Item } from '../Item';
+import { IconButton } from '../../controls/IconButton';
 
-const ToDo = (props) => (
+const ToDoRender = (props) => (
   <Item size="large" { ...props }>
     <input
       className="Item__section"
@@ -25,7 +25,7 @@ const ToDo = (props) => (
   </Item>
 );
 
-ToDo.propTypes = {
+ToDoRender.propTypes = {
   item: PropTypes.object.isRequired,
   actions: PropTypes.shape({
     edit: PropTypes.func,
@@ -33,4 +33,4 @@ ToDo.propTypes = {
   }),
 };
 
-export default Pure(ToDo);
+export const ToDo = Pure(ToDoRender);

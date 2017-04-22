@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import './ToDo.css';
 
-import Header from '../../page-elements/Header';
-import CategoryList from '../../items/CategoryList';
-import TwoRows from '../../layouts/TwoRows';
+import { Header } from '../../page-elements/Header';
+import { CategoryList } from '../../items/CategoryList';
+import { TwoRows } from '../../layouts/TwoRows';
 
-class Main extends PureComponent {
+export class ToDoPage extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -39,9 +39,6 @@ class Main extends PureComponent {
   }
 }
 
-
-Main.propTypes = {
+ToDoPage.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-
-export default Main;

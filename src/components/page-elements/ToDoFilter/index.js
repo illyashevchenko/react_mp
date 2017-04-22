@@ -1,3 +1,1 @@
-import Component from './ToDoFilter';
-
-export default Component;
+export * from './ToDoFilter';

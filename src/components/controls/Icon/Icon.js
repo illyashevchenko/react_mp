@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import './Icon.css';
 
+import { Pure } from '../../HOC/Pure';
+
 const baseClass = 'Icon';
 const getClass = ({ className, size = 'small' }) =>
   [
@@ -11,15 +13,15 @@ const getClass = ({ className, size = 'small' }) =>
     `${ baseClass }--${ size }`,
   ].join(' ');
 
-const Icon = (props) =>
+const IconRender = (props) =>
   <svg className={ getClass(props) }>
     <use xlinkHref={ `#${ props.name }` }/>
   </svg>;
 
-Icon.propTypes = {
+IconRender.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string.isRequired,
   size: PropTypes.string,
 };
 
-export default Icon;
+export const Icon = Pure(IconRender);

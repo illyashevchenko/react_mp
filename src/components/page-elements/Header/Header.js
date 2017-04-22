@@ -1,8 +1,8 @@
 import React from 'react';
-import Pure from '../../HOC/Pure';
+import { Pure } from '../../HOC/Pure';
 import './Header.css';
 
-function Header(props) {
+function HeaderRender(props) {
   return (
     <div className="Header">
       <h1 className="Header__heading">{ props.text }</h1>
@@ -11,4 +11,4 @@ function Header(props) {
   );
 }
 
-export default Pure(Header);
+export const Header = Pure(HeaderRender);

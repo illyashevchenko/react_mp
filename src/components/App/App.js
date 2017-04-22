@@ -6,12 +6,12 @@ import {
   Route,
 } from 'react-router-dom'
 
-import MainPage from '../pages/Main';
-import ToDoPage from '../pages/ToDo';
+import { MainPage } from '../pages/Main';
+import { ToDoPage } from '../pages/ToDo';
 
 import data from './data';
 
-class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.init();
@@ -65,5 +65,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;

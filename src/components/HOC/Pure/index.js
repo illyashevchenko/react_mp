@@ -1,3 +1,1 @@
-import Component from './Pure';
-
-export default Component;
+export * from './Pure';

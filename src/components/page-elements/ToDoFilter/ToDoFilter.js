@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './ToDoFilter.css';
 
-import Pure from '../../HOC/Pure';
+import { Pure } from '../../HOC/Pure';
 
 // TODO: refactor this
 const setItem = (set, filter, prop, eventProp) => // eslint-disable-line max-params
@@ -13,7 +13,7 @@ const setItem = (set, filter, prop, eventProp) => // eslint-disable-line max-par
     }));
 
 
-const ToDoFilter = ({ filter, actions: { set } }) =>
+const ToDoFilterRender = ({ filter, actions: { set } }) =>
   <div className="ToDoFilter">
     <label className="ToDoFilter__block">
       <input
@@ -30,7 +30,7 @@ const ToDoFilter = ({ filter, actions: { set } }) =>
       onChange={ setItem(set, filter, 'search', 'value') }/>
   </div>;
 
-ToDoFilter.PropTypes = {
+ToDoFilterRender.PropTypes = {
   filter: PropTypes.shape({
     search: PropTypes.string,
     onlyDone: PropTypes.bool,
@@ -40,4 +40,4 @@ ToDoFilter.PropTypes = {
   }),
 };
 
-export default Pure(ToDoFilter);
+export const ToDoFilter = Pure(ToDoFilterRender);

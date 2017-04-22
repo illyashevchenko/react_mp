@@ -3,8 +3,8 @@ import './Category.css';
 
 import { curry } from 'ramda';
 
-import Item from '../Item';
-import IconButton from '../../controls/IconButton';
+import { Item } from '../Item';
+import { IconButton } from '../../controls/IconButton';
 
 const getAction = (action, { actions, item }) =>
   () => actions[action](item);
@@ -26,7 +26,7 @@ const getButtons = (props, buttons) =>
  * @param { { item: { title: string }, actions: { [string]: function }} } props
  * @constructor
  */
-const CategoryBase = (props) => (
+export const CategoryBase = (props) => (
   <Item size="small" { ...props }>
     <span className="Item__section"/>
     {
@@ -48,5 +48,3 @@ const CategoryBase = (props) => (
     </span>
   </Item>
 );
-
-export default CategoryBase;

@@ -1,3 +1,1 @@
-import Component from './TwoRows';
-
-export default Component;
+export * from './TwoRows';

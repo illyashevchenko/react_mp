@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 
 import './TodoList.css';
 
-import ItemList from '../ItemList';
-import ToDo from '../ToDo';
-import ActionInput from '../../controls/ActionInput';
+import { ItemList } from '../ItemList';
+import { ToDo } from '../ToDo';
+import { ActionInput } from '../../controls/ActionInput';
 
 import actions from './actions';
 const { filtered, create, toggleDone } = actions;
 
 const emptyList = [];
 
-class TodoList extends PureComponent {
+export class TodoList extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -88,5 +88,3 @@ TodoList.propTypes = {
   })
     .isRequired,
 };
-
-export default TodoList;

@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
 
-export default (func) =>
+export const Pure = (func) =>
   class extends PureComponent {
     // TODO: it is not working for some reason
     static propTypes = func.propTypes;
@@ -8,4 +8,4 @@ export default (func) =>
     render() {
       return func(this.props, this.context)
     }
-  }
+  };

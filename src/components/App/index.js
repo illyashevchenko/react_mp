@@ -1,3 +1,1 @@
-import Component from './App';
-
-export default Component;
+export * from './App';

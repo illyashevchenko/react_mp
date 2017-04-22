@@ -1,3 +1,1 @@
-import Component from './Todo';
-
-export default Component;
+export * from './Todo';
