@@ -1,19 +1,14 @@
 import React from 'react';
 import { IconButton } from '../../controls/IconButton';
 
-import { curry } from 'ramda';
+import { map, memoize } from 'ramda';
 
-const getAction = (action, { actions, item }) =>
-  () => actions[action](item);
-
-const getButton = curry((props, button) =>
+const getButton = (button) =>
   <IconButton
     className="Item__button"
     name={ button.name }
     size="small"
-    key={ button.action }
-    onClick={ getAction(button.action, props) }/>
-);
+    key={ button.name }
+    onClick={ button.action }/>;
 
-export const getButtons = (props, buttons) =>
-  buttons.map(getButton(props));
+export const getButtons = memoize(map(getButton));
