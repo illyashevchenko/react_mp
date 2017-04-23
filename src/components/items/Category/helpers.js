@@ -11,4 +11,4 @@ const getButton = (button) =>
     key={ button.name }
     onClick={ button.action }/>;
 
-export const getButtons = map(getButton);
+export const renderButtons = map(getButton);

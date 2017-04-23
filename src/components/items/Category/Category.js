@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './Category.css';
 
 import { Item, ItemSection, ItemMain, ItemActions } from '../Item';
-import { getButtons } from './helpers';
+import { renderButtons } from './helpers';
 
 
 export class Category extends PureComponent {
@@ -24,36 +24,27 @@ export class Category extends PureComponent {
     this.editActions = {};
 
     this.onTitleChange = this.onTitleChange.bind(this);
+    this.handleKeyEvent = this.handleKeyEvent.bind(this);
+    this.focus = this.focus.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.state.inEdit) {
+      this.focus();
+    }
   }
 
   getViewTitleButtons() {
-    return getButtons([
+    return renderButtons([
       { name: 'edit', action: this.startEdit.bind(this) },
     ]);
   }
 
   getEditToolButtons() {
-    return getButtons([
+    return renderButtons([
       { name: 'checked', action: this.confirm.bind(this) },
       { name: 'cancel', action: this.cancel.bind(this) },
     ]);
-  }
-
-  getViewToolButtons() {
-    const { actions, item } = this.props;
-
-    return getButtons([
-      { name: 'remove', action: actions.remove.bind(null, item) },
-      { name: 'add', action: actions.addNested.bind(null, item) },
-    ]);
-  }
-
-  startEdit() {
-    this.setState({ inEdit: true });
-  }
-
-  endEdit() {
-    this.setState({ inEdit: false });
   }
 
   confirm() {
@@ -79,6 +70,23 @@ export class Category extends PureComponent {
     this.endEdit();
   }
 
+  startEdit() {
+    this.setState({ inEdit: true }, this.focus);
+  }
+
+  endEdit() {
+    this.setState({ inEdit: false });
+  }
+
+  getViewToolButtons() {
+    const { actions, item } = this.props;
+
+    return renderButtons([
+      { name: 'remove', action: actions.remove.bind(null, item) },
+      { name: 'add', action: actions.addNested.bind(null, item) },
+    ]);
+  }
+
   getViewBody() {
     return (
       <ItemMain>
@@ -95,7 +103,11 @@ export class Category extends PureComponent {
           className="Category-input"
           type="text"
           value={ this.state.title }
-          onChange={ this.onTitleChange }/>
+          onChange={ this.onTitleChange }
+          onKeyDown={ this.handleKeyEvent }
+          ref={(input) => {
+            this.input = input;
+          }}/>
       </ItemMain>
     );
   }
@@ -104,6 +116,22 @@ export class Category extends PureComponent {
     this.setState({
       title: event.target.value,
     });
+  }
+
+  handleKeyEvent(event) {
+    switch (event.key) {
+      case 'Escape':
+        this.cancel();
+        break;
+      case 'Enter':
+        this.confirm();
+        break;
+      default:
+    }
+  }
+
+  focus() {
+    this.input.focus();
   }
 
   render() {
