@@ -1,2 +1,47 @@
+@import '../../assets/styles.scss';
+@import '../../assets/forms.scss';
+
 .ToDoForm {
+  &__actions {
+    @include flex;
+    justify-content: flex-end;
+
+    &-button {
+      &:not(:last-child) {
+        margin-right: 7px;
+      }
+    }
+  }
+
+  &__form {
+    margin-top: 15px;
+
+    @include flex;
+    @include flex-column;
+
+    &-element {
+      margin-top: 15px;
+    }
+
+    &-input {
+      @include form-element-base;
+      @include form-element-padding;
+      @include form-element-states;
+      @include form-element-default;
+
+      &--short {
+        max-width: 400px;
+      }
+
+      &--vertical {
+        resize: vertical;
+      }
+    }
+
+    &-checkbox {
+      &-input {
+        margin-right: 6px;
+      }
+    }
+  }
 }

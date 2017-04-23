@@ -8,7 +8,7 @@ import { Pure } from '../../HOC/Pure';
 
 const getViewToolButtons = ({ actions, item, isActive }) =>
   renderButtons([
-    !isActive && { name: 'remove', action: actions.assign.bind(null, item) },
+    !isActive && { name: 'link', action: actions.assign.bind(null, item) },
   ]);
 
 const CategoryAssignRender = (props) => (

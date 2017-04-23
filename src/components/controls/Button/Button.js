@@ -10,7 +10,7 @@ const baseClass = 'Button';
 const getSiblingOnClass = (siblingOn) =>
   siblingOn.map((type) => `${ baseClass }--sibling-on-${ type }`);
 
-const getClass = ({ type = 'default', siblingOn = [], size = 'normal', className }) =>
+const getClass = ({ type = 'default', siblingOn = [], size = 'middle', className }) =>
   [
     baseClass,
     `${ baseClass }--${ type }`,
