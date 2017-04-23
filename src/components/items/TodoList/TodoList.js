@@ -8,7 +8,6 @@ import { ToDo } from '../ToDo';
 import { ActionInput } from '../../controls/ActionInput';
 
 import actions from './actions';
-const { filtered, create, toggleDone } = actions;
 
 const emptyList = [];
 
@@ -29,7 +28,7 @@ export class TodoList extends PureComponent {
     }
 
     const { actions: { set }, activeCategory, tasks } = this.props;
-    const toDo = create(title, activeCategory);
+    const toDo = actions.create(title, activeCategory);
 
     set([toDo, ...tasks]);
   }
@@ -37,7 +36,7 @@ export class TodoList extends PureComponent {
   toggleDone(item) {
     const { actions: { set }, tasks } = this.props;
 
-    set(toggleDone(item, tasks));
+    set(actions.toggleDone(item, tasks));
   }
 
   getList() {
@@ -54,24 +53,26 @@ export class TodoList extends PureComponent {
     }
 
     const filter = { search, onlyDone, categoryId };
-    return filtered(filter, tasks);
+    return actions.filtered(filter, tasks);
   }
 
   render() {
     return this.props.activeCategory
-      ? <div className="TodoList">
-        <ActionInput
-          className="TodoList__input"
-          placeholder="Enter title"
-          actionTitle="Add"
-          onAct={ this.add }/>
-        <ItemList
-          className="TodoList__list"
-          list={ this.getList() }
-          actions={ this.taskActions }
-          Element={ ToDo }
-          keyPath="id"/>
-      </div>
+      ? (
+        <div className="TodoList">
+          <ActionInput
+            className="TodoList__input"
+            placeholder="Enter title"
+            actionTitle="Add"
+            onAct={ this.add }/>
+          <ItemList
+            className="TodoList__list"
+            list={ this.getList() }
+            actions={ this.taskActions }
+            Element={ ToDo }
+            keyPath="id"/>
+        </div>
+      )
       : <div>There is no active category. Please select one</div>;
   }
 }
