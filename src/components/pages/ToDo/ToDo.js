@@ -5,7 +5,10 @@ import './ToDo.css';
 
 import { Header } from '../../page-elements/Header';
 import { CategoryAssignList } from '../../items/CategoryAssignList';
+import { ToDoForm } from '../../items/ToDoForm';
 import { TwoRows } from '../../layouts/TwoRows';
+
+import * as actions from './actions';
 
 export class ToDoPage extends PureComponent {
   constructor(props) {
@@ -20,17 +23,29 @@ export class ToDoPage extends PureComponent {
     console.log('Assign category ', item.title, ' to task ', this.props.match.params.taskId)
   }
 
-  createCategoryList() {
+  createCategoryList(task) {
     const { categories } = this.props;
+    const assigned = actions.findById(task.categoryId, categories);
 
     return (
       <CategoryAssignList
         categories={ categories }
+        assigned={ assigned }
         actions={ this.categoriesActions }/>
     );
   }
 
+  createTaskForm(task) {
+    return (
+      <ToDoForm
+        item={ task }/>
+    );
+  }
+
   render() {
+    const { tasks, match: { params } } = this.props;
+    const task = actions.findById(params.taskId, tasks);
+
     return (
       <div className="page-ToDo page">
         <div className="page__section-static">
@@ -38,8 +53,8 @@ export class ToDoPage extends PureComponent {
         </div>
         <TwoRows
           className="page__section-flexible"
-          left={ this.createCategoryList() }
-          right={ <div>Here will be a form for: { this.props.match.params.taskId }</div> }/>
+          left={ this.createCategoryList(task) }
+          right={ this.createTaskForm(task) }/>
       </div>
     );
   }
@@ -47,4 +62,10 @@ export class ToDoPage extends PureComponent {
 
 ToDoPage.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      taskId: PropTypes.string.isRequired,
+    }),
+  }),
 };

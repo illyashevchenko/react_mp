@@ -26,12 +26,12 @@ const ToDoRender = ({ item, actions }) => (
   </Item>
 );
 
-ToDoRender.propTypes = {
+export const ToDo = Pure(ToDoRender);
+
+ToDo.propTypes = {
   item: PropTypes.object.isRequired,
   actions: PropTypes.shape({
     edit: PropTypes.func,
     toggle: PropTypes.func.isRequired,
   }),
 };
-
-export const ToDo = Pure(ToDoRender);

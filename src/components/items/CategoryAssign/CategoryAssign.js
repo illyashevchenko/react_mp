@@ -6,14 +6,16 @@ import { renderButtons } from '../helpers';
 
 import { Pure } from '../../HOC/Pure';
 
-const getViewToolButtons = ({ actions, item }) =>
+const getViewToolButtons = ({ actions, item, isActive }) =>
   renderButtons([
-    { name: 'remove', action: actions.assign.bind(null, item) },
+    !isActive && { name: 'remove', action: actions.assign.bind(null, item) },
   ]);
 
 const CategoryAssignRender = (props) => (
   <Item
-    item={ props.item }>
+    item={ props.item }
+    isActive={ props.isActive }
+    staticTools>
     <ItemSection/>
     <ItemMain>
       { props.item.title }

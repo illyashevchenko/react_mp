@@ -32,11 +32,11 @@
     background-color: $light-blue;
   }
 
-  &__button {
+  &--tools-dynamic &__button {
     visibility: hidden;
   }
 
-  &:hover &__button {
+  &--tools-dynamic:hover &__button {
     visibility: visible;
   }
 

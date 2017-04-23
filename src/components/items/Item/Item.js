@@ -18,11 +18,12 @@ const onClick = (actions, item) => (
   )
 );
 
-const getClass = ({ size = 'small', isActive }) =>
+const getClass = ({ size = 'small', isActive, staticTools }) =>
   [
     baseClass,
     `${ baseClass }--${ size }`,
     isActive ? `${ baseClass }--active` : '',
+    staticTools ? '' : `${ baseClass }--tools-dynamic`,
   ].join(' ');
 
 const ItemRender = (props) => (
