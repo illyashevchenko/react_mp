@@ -7,11 +7,16 @@ import { Pure } from '../../HOC/Pure';
 
 const baseClass = 'Item';
 
-const onClick = (select, item) =>
-select && ((event) => {
-  select(item);
-  event.stopPropagation();
-});
+const onClick = (actions, item) => (
+  actions &&
+  actions.select &&
+  (
+    (event) => {
+      actions.select(item);
+      event.stopPropagation();
+    }
+  )
+);
 
 const getClass = ({ size = 'small', isActive }) =>
   [
@@ -23,7 +28,7 @@ const getClass = ({ size = 'small', isActive }) =>
 const ItemRender = (props) => (
   <div
     className={ getClass(props) }
-    onClick={ onClick(props.actions.select, props.item) }>
+    onClick={ onClick(props.actions, props.item) }>
     { props.children }
   </div>
 );

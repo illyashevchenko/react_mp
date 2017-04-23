@@ -1,14 +1,10 @@
 @import '../../assets/styles.scss';
+@import '../CategorySelectList/CategorySelectList.scss'; // TODO: it is not working from JS for some reason
 
 .CategoryList {
   @include flex;
   @include flex-column;
   @include full-height;
-
-  &__input {
-    @include flex-static;
-    margin-bottom: $space-after-input;
-  }
 
   &__list {
     @include flex-stretchy;

@@ -8,7 +8,7 @@ import actions from './actions';
 import { Header } from '../../page-elements/Header';
 import { ProgressBar } from '../../page-elements/ProgressBar';
 import { ToDoFilter } from '../../page-elements/ToDoFilter';
-import { CategoryList } from '../../items/CategoryList';
+import { CategorySelectList } from '../../items/CategorySelectList';
 import { TodoList } from '../../items/TodoList';
 import { TwoRows } from '../../layouts/TwoRows';
 
@@ -31,6 +31,7 @@ export class MainPage extends PureComponent {
 
     this.todoActions = {
       set: setTasks,
+      select: this.selectToDo.bind(this),
     };
   }
 
@@ -56,7 +57,7 @@ export class MainPage extends PureComponent {
     const { categories, category } = this.props;
 
     return (
-      <CategoryList
+      <CategorySelectList
         categories={ categories }
         active={ category }
         actions={ this.categoriesActions }/>
@@ -73,6 +74,12 @@ export class MainPage extends PureComponent {
         filter={ this.state.filter }
         actions={ this.todoActions }/>
     );
+  }
+
+  selectToDo(item) {
+    this.props.history.push({
+      pathname: `/edit/${ item.id }`,
+    });
   }
 
   render() {

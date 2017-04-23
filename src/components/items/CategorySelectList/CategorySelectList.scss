@@ -1,0 +1,6 @@
+@import '../../assets/styles.scss';
+
+.CategorySelectList-input {
+  @include flex-static;
+  margin-bottom: $space-after-input;
+}

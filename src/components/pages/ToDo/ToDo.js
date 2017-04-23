@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './ToDo.css';
 
 import { Header } from '../../page-elements/Header';
-import { CategoryList } from '../../items/CategoryList';
+import { CategoryAssignList } from '../../items/CategoryAssignList';
 import { TwoRows } from '../../layouts/TwoRows';
 
 export class ToDoPage extends PureComponent {
@@ -18,7 +18,7 @@ export class ToDoPage extends PureComponent {
     const { categories } = this.props;
 
     return (
-      <CategoryList
+      <CategoryAssignList
         categories={ categories }
         actions={ this.categoriesActions }/>
     );

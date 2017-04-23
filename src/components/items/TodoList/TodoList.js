@@ -19,6 +19,7 @@ export class TodoList extends PureComponent {
     this.add = this.add.bind(this);
     this.taskActions = {
       toggle: this.toggleDone.bind(this),
+      edit: props.actions.select,
     };
   }
 
@@ -85,6 +86,7 @@ TodoList.propTypes = {
     .isRequired,
   actions: PropTypes.shape({
     set: PropTypes.func.isRequired,
+    select: PropTypes.func.isRequired,
   })
     .isRequired,
 };

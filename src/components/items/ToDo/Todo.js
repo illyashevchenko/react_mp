@@ -8,19 +8,20 @@ import { Pure } from '../../HOC/Pure';
 import { Item } from '../Item';
 import { IconButton } from '../../controls/IconButton';
 
-const ToDoRender = (props) => (
-  <Item size="large" { ...props }>
+const ToDoRender = ({ item, actions }) => (
+  <Item size="large"
+        item={ item }>
     <input
       className="Item__section"
       type="checkbox"
-      checked={ props.item.done }
-      onChange={ () => props.actions.toggle(props.item)}/>
-    <span className="Item__main">{ props.item.title }</span>
+      checked={ item.done }
+      onChange={ () => actions.toggle(item) }/>
+    <span className="Item__main">{ item.title }</span>
     <span className="Item__actions">
       <IconButton
         className="Item__button"
         name="edit"
-        onClick={ () => ({}) }/>
+        onClick={ () => actions.edit(item) }/>
     </span>
   </Item>
 );
