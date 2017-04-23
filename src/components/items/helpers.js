@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton } from '../../controls/IconButton';
+import { IconButton } from '../controls/IconButton/index';
 
 import { map } from 'ramda';
 

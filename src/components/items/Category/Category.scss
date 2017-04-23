@@ -1,8 +1,6 @@
 @import '../../assets/forms.scss';
 
-.Category {
-
-  &-input {
+.Category-input {
     width: 100%;
     box-sizing: border-box;
 
@@ -10,5 +8,4 @@
     @include form-element-padding;
     @include form-element-states;
     @include form-element-default;
-  }
 }

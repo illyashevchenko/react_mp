@@ -11,7 +11,13 @@ export class ToDoPage extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.categoriesActions = {};
+    this.categoriesActions = {
+      assign: this.assign.bind(this),
+    };
+  }
+
+  assign(item) {
+    console.log('Assign category ', item.title, ' to task ', this.props.match.params.taskId)
   }
 
   createCategoryList() {

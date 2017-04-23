@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './Category.css';
 
 import { Item, ItemSection, ItemMain, ItemActions } from '../Item';
-import { renderButtons } from './helpers';
+import { renderButtons } from '../helpers';
 
 
 export class Category extends PureComponent {

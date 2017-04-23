@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import './CategorySelectList.scss';
+import './CategorySelectList.css';
 
 import { ActionInput } from '../../controls/ActionInput';
 
