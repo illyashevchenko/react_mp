@@ -1,36 +1,30 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Item, ItemSection, ItemMain, ItemActions } from '../Item';
 import { renderButtons } from '../helpers';
 
+import { Pure } from '../../HOC/Pure';
 
-export class CategoryAssign extends PureComponent {
-  getViewToolButtons() {
-    const { actions, item } = this.props;
+const getViewToolButtons = ({ actions, item }) =>
+  renderButtons([
+    { name: 'remove', action: actions.assign.bind(null, item) },
+  ]);
 
-    return renderButtons([
-      { name: 'remove', action: actions.assign.bind(null, item) },
-    ]);
-  }
+const CategoryAssignRender = (props) => (
+  <Item
+    item={ props.item }>
+    <ItemSection/>
+    <ItemMain>
+      { props.item.title }
+    </ItemMain>
+    <ItemActions>
+      { getViewToolButtons(props) }
+    </ItemActions>
+  </Item>
+);
 
-  render() {
-    const { item } = this.props;
-
-    return (
-      <Item
-        { ...{ item } }>
-        <ItemSection/>
-        <ItemMain>
-          { item.title }
-        </ItemMain>
-        <ItemActions>
-          { this.getViewToolButtons() }
-        </ItemActions>
-      </Item>
-    );
-  }
-}
+export const CategoryAssign = Pure(CategoryAssignRender);
 
 CategoryAssign.propTypes = {
   item: PropTypes.object.isRequired,
