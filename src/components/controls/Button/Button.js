@@ -23,6 +23,7 @@ const getClass = ({ type = 'default', siblingOn = [], size = 'middle', className
 
 const ButtonRender = (props) =>
   <button className={ getClass(props) }
+          type="button"
           onClick={ props.onClick }>{ props.children }</button>;
 
 ButtonRender.propTypes = {
