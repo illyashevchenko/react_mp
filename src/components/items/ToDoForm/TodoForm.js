@@ -47,7 +47,7 @@ export class ToDoForm extends PureComponent {
     const { actions, item } = this.props;
 
     return () => {
-      actions[name](item, pickProps(this.state));
+      actions[name](pickProps(this.state), item);
     };
   }
 
@@ -74,7 +74,7 @@ export class ToDoForm extends PureComponent {
             <input
               type="checkbox"
               className={ getFormClass('form-checkbox-input') }
-              value={ done }
+              checked={ done }
               onChange={ this.updateState('done', 'checked') }/>
             Done
           </label>

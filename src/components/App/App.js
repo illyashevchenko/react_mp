@@ -58,7 +58,9 @@ export class App extends Component {
             render={ (props) =>
               <ToDoPage
                 { ...this.state }
-                { ...props }/>
+                { ...props }
+                setTasks={ this.setTasks }
+              />
             }/>
         </div>
       </BrowserRouter>

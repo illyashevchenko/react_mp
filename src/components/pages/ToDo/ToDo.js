@@ -17,15 +17,47 @@ export class ToDoPage extends PureComponent {
     this.categoriesActions = {
       assign: this.assign.bind(this),
     };
+
+    this.formActions = {
+      cancel: this.cancel.bind(this),
+      confirm: this.confirm.bind(this),
+    }
   }
 
-  assign(item) {
-    console.log('Assign category ', item.title, ' to task ', this.props.match.params.taskId)
+  initTask() {
+    const { tasks, match: { params } } = this.props;
+    this.task = actions.findById(params.taskId, tasks);
   }
 
-  createCategoryList(task) {
+  assign(category) {
+    this.modifyTask({ categoryId: category.id });
+  }
+
+  cancel() {
+    this.goToList();
+  }
+
+  confirm(newFields) {
+    this.modifyTask(newFields);
+    this.goToList();
+  }
+
+  modifyTask(newFields) {
+    const { setTasks, tasks } = this.props;
+    setTasks(
+      actions.modifyTask(tasks, this.task, newFields)
+    );
+  }
+
+  goToList() {
+    this.props.history.push({
+      pathname: '/',
+    });
+  }
+
+  createCategoryList() {
     const { categories } = this.props;
-    const assigned = actions.findById(task.categoryId, categories);
+    const assigned = actions.findById(this.task.categoryId, categories);
 
     return (
       <CategoryAssignList
@@ -35,16 +67,16 @@ export class ToDoPage extends PureComponent {
     );
   }
 
-  createTaskForm(task) {
+  createTaskForm() {
     return (
       <ToDoForm
-        item={ task }/>
+        item={ this.task }
+        actions={ this.formActions }/>
     );
   }
 
   render() {
-    const { tasks, match: { params } } = this.props;
-    const task = actions.findById(params.taskId, tasks);
+    this.initTask();
 
     return (
       <div className="page-ToDo page">
@@ -53,8 +85,8 @@ export class ToDoPage extends PureComponent {
         </div>
         <TwoRows
           className="page__section-flexible"
-          left={ this.createCategoryList(task) }
-          right={ this.createTaskForm(task) }/>
+          left={ this.createCategoryList() }
+          right={ this.createTaskForm() }/>
       </div>
     );
   }
@@ -67,5 +99,9 @@ ToDoPage.propTypes = {
     params: PropTypes.shape({
       taskId: PropTypes.string.isRequired,
     }),
+  }),
+  setTasks: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
   }),
 };
