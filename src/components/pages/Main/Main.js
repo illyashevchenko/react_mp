@@ -39,7 +39,7 @@ export class MainPage extends PureComponent {
 
   selectCategory(category) {
     this.props.selectCategory(category);
-    this.setQueryParams({ categoryId: category.id });
+    this.setQueryParams({ categoryId: category && category.id });
   }
 
   setFilter(filter) {
@@ -69,10 +69,8 @@ export class MainPage extends PureComponent {
   }
 
   handleActiveCategoryDeleted(removedCategory) {
-    const { selectCategory, category } = this.props;
-
-    if (removedCategory === category) {
-      selectCategory(null);
+    if (removedCategory === this.props.category) {
+      this.selectCategory(null);
     }
   }
 
