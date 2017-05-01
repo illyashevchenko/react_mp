@@ -7,13 +7,14 @@ import { createStore } from 'redux';
 import { App } from './App';
 import { godReducer } from './reducers';
 
+import { stubData } from './stub-data';
 
 import SvgLib from './components/assets/SvgLib';
 import './index.css';
 
 import './components/assets';
 
-const store = createStore(godReducer);
+const store = createStore(godReducer, stubData);
 
 const Container = () =>
   <Provider
