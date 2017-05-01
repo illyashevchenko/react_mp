@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+import QueryString from 'query-string';
+
 import './Main.css';
 
 import actions from './actions';
@@ -16,7 +18,6 @@ export class MainPage extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { filter: { search: '', onlyDone: false } };
     this.filterActions = {
       set: this.setFilter.bind(this),
     };
@@ -50,7 +51,10 @@ export class MainPage extends PureComponent {
   }
 
   setFilter(filter) {
-    this.setState({ filter });
+    const { history: { location: { pathname } } } = this.props;
+    const search = QueryString.stringify(filter);
+
+    this.props.history.push({ pathname, search });
   }
 
   createCategoryList() {
@@ -64,14 +68,14 @@ export class MainPage extends PureComponent {
     );
   }
 
-  createTodoList() {
+  createTodoList(filter) {
     const { tasks, category } = this.props;
 
     return (
       <TodoList
         tasks={ tasks }
         activeCategory={ category }
-        filter={ this.state.filter }
+        filter={ filter }
         actions={ this.todoActions }/>
     );
   }
@@ -82,21 +86,34 @@ export class MainPage extends PureComponent {
     });
   }
 
+  getFilterFromLocation() {
+    const { location } = this.props;
+    const filter = QueryString.parse(location.search);
+
+    return {
+      ...filter,
+      onlyDone: filter.onlyDone === 'true',
+    };
+  }
+
   render() {
+    const filter = this.getFilterFromLocation();
+
     return (
       <div className="page-Main page">
         <div className="page__section-static">
           <Header text="To-Do List">
             <ToDoFilter
-              filter={ this.state.filter }
+              filter={ filter }
               actions={ this.filterActions }/>
           </Header>
-          <ProgressBar complete={ actions.completedPercentage(this.props.tasks)}/>
+          <ProgressBar
+            complete={ actions.completedPercentage(this.props.tasks)}/>
         </div>
         <TwoRows
           className="page__section-flexible"
           left={ this.createCategoryList() }
-          right={ this.createTodoList() }/>
+          right={ this.createTodoList(filter) }/>
       </div>
     );
   }
@@ -111,4 +128,10 @@ MainPage.propTypes = {
   setCategories: PropTypes.func.isRequired,
   selectCategory: PropTypes.func.isRequired,
   setTasks: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({}),
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
 };

@@ -19,7 +19,7 @@ const ToDoFilterRender = ({ filter, actions: { set } }) =>
       <input
         type="checkbox"
         className="ToDoFilter__checkbox"
-        value={ filter.onlyDone }
+        checked={ filter.onlyDone }
         onChange={ setItem(set, filter, 'onlyDone', 'checked') }/>
       Show done
     </label>
