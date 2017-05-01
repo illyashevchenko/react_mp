@@ -7,7 +7,7 @@ import { ItemList } from '../ItemList';
 import { ToDo } from '../ToDo';
 import { ActionInput } from '../../controls/ActionInput';
 
-import actions from './actions';
+import Actions from './actions';
 
 const emptyList = [];
 
@@ -28,7 +28,7 @@ export class TodoList extends PureComponent {
     }
 
     const { actions: { set }, activeCategory, tasks } = this.props;
-    const toDo = actions.create(title, activeCategory);
+    const toDo = Actions.create(title, activeCategory);
 
     set([toDo, ...tasks]);
   }
@@ -36,7 +36,7 @@ export class TodoList extends PureComponent {
   toggleDone(item) {
     const { actions: { set }, tasks } = this.props;
 
-    set(actions.toggleDone(item, tasks));
+    set(Actions.toggleDone(item, tasks));
   }
 
   getList() {
@@ -53,7 +53,7 @@ export class TodoList extends PureComponent {
     }
 
     const filter = { search, onlyDone, categoryId };
-    return actions.filtered(filter, tasks);
+    return Actions.filtered(filter, tasks);
   }
 
   render() {

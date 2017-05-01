@@ -8,12 +8,12 @@ import './Main.css';
 import * as Actions from './actions';
 import * as PageActions from '../actions';
 
-import { Header } from '../../page-elements/Header';
-import { ProgressBar } from '../../page-elements/ProgressBar';
-import { ToDoFilter } from '../../page-elements/ToDoFilter';
-import { CategorySelectList } from '../../items/CategorySelectList';
-import { TodoList } from '../../items/TodoList';
-import { TwoRows } from '../../layouts/TwoRows';
+import { Header } from '../../components/page-elements/Header';
+import { ProgressBar } from '../../components/page-elements/ProgressBar';
+import { ToDoFilter } from '../../components/page-elements/ToDoFilter';
+import { CategorySelectList } from '../../components/items/CategorySelectList';
+import { TodoList } from '../../components/items/TodoList';
+import { TwoRows } from '../../components/layouts/TwoRows';
 
 export class MainPage extends PureComponent {
   constructor(props) {

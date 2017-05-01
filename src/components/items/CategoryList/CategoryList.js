@@ -6,7 +6,7 @@ import './CategoryList.css';
 import { ItemList } from '../ItemList';
 import { Pure } from '../../HOC/Pure';
 
-import commonActions from './actions';
+import Actions from './actions';
 
 export const CategoryListContainer = Pure(({ children }) => (
   <div className="CategoryList">
@@ -18,8 +18,10 @@ export const CategoryList = Pure(
   ({ categories, active, actions, Element }) => (
     <ItemList
       className="CategoryList__list"
-      list={ commonActions.getTree(categories) }
-      { ...{ active, actions, Element } }
+      list={ Actions.getTree(categories) }
+      active={ active }
+      actions={ actions}
+      Element={ Element }
       keyPath="id"/>
   )
 );

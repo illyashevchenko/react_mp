@@ -8,7 +8,7 @@ import { ActionInput } from '../../controls/ActionInput';
 import { CategoryList, CategoryListContainer } from '../CategoryList';
 import { Category } from '../Category';
 
-import actions from '../CategoryList/actions';
+import Actions from '../CategoryList/actions';
 
 export class CategorySelectList extends PureComponent {
   constructor(props) {
@@ -32,7 +32,7 @@ export class CategorySelectList extends PureComponent {
     const { categories, actions: { set } } = this.props;
 
     set(
-      actions.addCategory(title, categories)
+      Actions.addCategory(title, categories)
     );
   }
 
@@ -40,7 +40,7 @@ export class CategorySelectList extends PureComponent {
     const { categories, actions: { set } } = this.props;
 
     set(
-      actions.addNested(parent, categories)
+      Actions.addNested(parent, categories)
     );
   }
 
@@ -48,12 +48,12 @@ export class CategorySelectList extends PureComponent {
     const { categories, actions: { set } } = this.props;
 
     set(
-      actions.modifyCategory(categories, item, { title })
+      Actions.modifyCategory(categories, item, { title })
     );
   }
 
   cancel(item) {
-    if (!actions.shouldRemove(item)) {
+    if (!Actions.shouldRemove(item)) {
       return;
     }
 

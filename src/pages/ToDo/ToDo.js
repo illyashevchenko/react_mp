@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import './ToDo.css';
 
-import { Header } from '../../page-elements/Header';
-import { CategoryAssignList } from '../../items/CategoryAssignList';
-import { ToDoForm } from '../../items/ToDoForm';
-import { TwoRows } from '../../layouts/TwoRows';
+import { Header } from '../../components/page-elements/Header';
+import { CategoryAssignList } from '../../components/items/CategoryAssignList';
+import { ToDoForm } from '../../components/items/ToDoForm';
+import { TwoRows } from '../../components/layouts/TwoRows';
 
 import * as Actions from './actions';
 import * as PagesActions from '../actions';
