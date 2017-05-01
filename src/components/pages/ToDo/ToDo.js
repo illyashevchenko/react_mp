@@ -22,16 +22,22 @@ export class ToDoPage extends PureComponent {
     this.formActions = {
       cancel: this.cancel.bind(this),
       confirm: this.confirm.bind(this),
-    }
+    };
+
+    this.state = {
+      task: this.getTask(),
+    };
   }
 
-  initTask() {
+  getTask() {
     const { tasks, match: { params } } = this.props;
-    this.task = PagesActions.findById(params.taskId, tasks);
+    return PagesActions.findById(params.taskId, tasks);
   }
 
   assign(category) {
-    this.modifyTask({ categoryId: category.id });
+    this.setState({
+      task: Actions.setCategory(category, this.state.task),
+    });
   }
 
   cancel() {
@@ -39,14 +45,14 @@ export class ToDoPage extends PureComponent {
   }
 
   confirm(newFields) {
-    this.modifyTask(newFields);
+    this.setNewTasks(newFields);
     this.goToList();
   }
 
-  modifyTask(newFields) {
+  setNewTasks(newFields) {
     const { setTasks, tasks } = this.props;
     setTasks(
-      Actions.modifyTask(tasks, this.task, newFields)
+      Actions.modifyTask(tasks, this.state.task, newFields)
     );
   }
 
@@ -56,7 +62,7 @@ export class ToDoPage extends PureComponent {
 
   createCategoryList() {
     const { categories } = this.props;
-    const assigned = PagesActions.findById(this.task.categoryId, categories);
+    const assigned = PagesActions.findById(this.state.task.categoryId, categories);
 
     return (
       <CategoryAssignList
@@ -69,14 +75,12 @@ export class ToDoPage extends PureComponent {
   createTaskForm() {
     return (
       <ToDoForm
-        item={ this.task }
+        item={ this.state.task }
         actions={ this.formActions }/>
     );
   }
 
   render() {
-    this.initTask();
-
     return (
       <div className="page-ToDo page">
         <div className="page__section-static">

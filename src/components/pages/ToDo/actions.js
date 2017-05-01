@@ -1,10 +1,14 @@
 import Ramda from 'ramda';
 
-const { update, findIndex, equals, merge } = Ramda;
+const { update, findIndex, propEq, merge } = Ramda;
 
-export const modifyTask = (list, item, changes) => // TODO: copy-paste from CategoryList/actions - only isNew is not cleared
+export const modifyTask = (list, item, changes) =>
   update(
-    findIndex(equals(item), list),
+    findIndex(propEq('id', item.id), list),
     merge(item, changes),
     list
   );
+
+const { useWith, assoc, prop, identity } = Ramda;
+
+export const setCategory = useWith(assoc('categoryId'), [prop('id'), identity]);
