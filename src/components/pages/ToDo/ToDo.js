@@ -95,12 +95,12 @@ export class ToDoPage extends PureComponent {
 ToDoPage.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setTasks: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       taskId: PropTypes.string.isRequired,
     }),
   }),
-  setTasks: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }),
