@@ -19,7 +19,7 @@ export const App = () => (
 
       <Route
         path="/edit/:taskId"
-        render={ ToDoPage }/>
+        component={ ToDoPage }/>
 
     </div>
   </BrowserRouter>

@@ -15,9 +15,9 @@ const matcher = pipe(whereMatcher, where);
 const filtered = useWith(filter, [matcher, identity]);
 
 
-const create = (title, category) => ({
+const create = (title, categoryId) => ({
   title,
-  categoryId: category.id,
+  categoryId,
   done: false,
   id: Date.now(),
 });

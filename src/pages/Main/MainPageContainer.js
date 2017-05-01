@@ -3,7 +3,7 @@ import Ramda from 'ramda';
 import { MainPage as Component } from './Main';
 
 const { useWith, pick, merge, identity } = Ramda;
-const storeProps = ['categories', 'category', 'tasks'];
+const storeProps = ['categories', 'categoryId', 'tasks'];
 const mapStateToProps = useWith(merge, [pick(storeProps), identity]);
 
 const mapDispatchToProps = (dispatch) => ({

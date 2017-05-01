@@ -38,8 +38,7 @@ export class MainPage extends PureComponent {
   }
 
   selectCategory(category) {
-    this.props.selectCategory(category);
-    this.setQueryParams({ categoryId: category && category.id });
+    this.setQueryParams({ categoryId: category.id });
   }
 
   setFilter(filter) {
@@ -64,33 +63,11 @@ export class MainPage extends PureComponent {
 
     setCategories(result.categories);
     setTasks(result.tasks);
-
-    this.handleActiveCategoryDeleted(category);
   }
 
-  handleActiveCategoryDeleted(removedCategory) {
-    if (removedCategory === this.props.category) {
-      this.selectCategory(null);
-    }
-  }
-
-  componentDidMount() {
-    this.selectCategoryFromLocation();
-
-  }
-
-  selectCategoryFromLocation() {
-    const { location: { search }, selectCategory, categories } = this.props;
-    const categoryId = QueryString.parse(search).categoryId;
+  createCategoryList({ categoryId }) {
+    const { categories } = this.props;
     const category = PageActions.findById(categoryId, categories);
-
-    if (category) {
-      selectCategory(category);
-    }
-  }
-
-  createCategoryList() {
-    const { categories, category } = this.props;
 
     return (
       <CategorySelectList
@@ -101,12 +78,12 @@ export class MainPage extends PureComponent {
   }
 
   createTodoList(filter) {
-    const { tasks, category } = this.props;
+    const { tasks } = this.props;
 
     return (
       <TodoList
         tasks={ tasks }
-        activeCategory={ category }
+        categoryId={ filter.categoryId }
         filter={ filter }
         actions={ this.todoActions }/>
     );
@@ -123,8 +100,8 @@ export class MainPage extends PureComponent {
     const filter = QueryString.parse(location.search);
 
     return {
-      search: '',
-      ...filter,
+      search: filter.search || '',
+      categoryId: +filter.categoryId || null,
       onlyDone: filter.onlyDone === 'true',
     };
   }
@@ -145,7 +122,7 @@ export class MainPage extends PureComponent {
         </div>
         <TwoRows
           className="page__section-flexible"
-          left={ this.createCategoryList() }
+          left={ this.createCategoryList(filter) }
           right={ this.createTodoList(filter) }/>
       </div>
     );
@@ -155,7 +132,7 @@ export class MainPage extends PureComponent {
 
 MainPage.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  category: PropTypes.object,
+  categoryId: PropTypes.number,
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
 
   setCategories: PropTypes.func.isRequired,

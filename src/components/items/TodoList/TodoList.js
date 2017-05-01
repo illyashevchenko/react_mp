@@ -27,8 +27,8 @@ export class TodoList extends PureComponent {
       return;
     }
 
-    const { actions: { set }, activeCategory, tasks } = this.props;
-    const toDo = Actions.create(title, activeCategory);
+    const { actions: { set }, categoryId, tasks } = this.props;
+    const toDo = Actions.create(title, categoryId);
 
     set([toDo, ...tasks]);
   }
@@ -42,11 +42,9 @@ export class TodoList extends PureComponent {
   getList() {
     const {
       filter: { search, onlyDone },
-      activeCategory,
+      categoryId,
       tasks,
     } = this.props;
-
-    const { id: categoryId } = activeCategory || {}; // for some reason babel doesn't allow default values in destructuring
 
     if (!categoryId) {
       return emptyList;
@@ -57,7 +55,7 @@ export class TodoList extends PureComponent {
   }
 
   render() {
-    return this.props.activeCategory
+    return this.props.categoryId
       ? (
         <div className="TodoList">
           <ActionInput
@@ -79,7 +77,7 @@ export class TodoList extends PureComponent {
 
 TodoList.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
-  activeCategory: PropTypes.object,
+  categoryId: PropTypes.number,
   filter: PropTypes.shape({
     search: PropTypes.string,
     onlyDone: PropTypes.bool,
