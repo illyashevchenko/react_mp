@@ -8,7 +8,8 @@ import { CategoryAssignList } from '../../items/CategoryAssignList';
 import { ToDoForm } from '../../items/ToDoForm';
 import { TwoRows } from '../../layouts/TwoRows';
 
-import * as actions from './actions';
+import * as Actions from './actions';
+import * as PagesActions from '../actions';
 
 export class ToDoPage extends PureComponent {
   constructor(props) {
@@ -26,7 +27,7 @@ export class ToDoPage extends PureComponent {
 
   initTask() {
     const { tasks, match: { params } } = this.props;
-    this.task = actions.findById(params.taskId, tasks);
+    this.task = PagesActions.findById(params.taskId, tasks);
   }
 
   assign(category) {
@@ -45,7 +46,7 @@ export class ToDoPage extends PureComponent {
   modifyTask(newFields) {
     const { setTasks, tasks } = this.props;
     setTasks(
-      actions.modifyTask(tasks, this.task, newFields)
+      Actions.modifyTask(tasks, this.task, newFields)
     );
   }
 
@@ -55,7 +56,7 @@ export class ToDoPage extends PureComponent {
 
   createCategoryList() {
     const { categories } = this.props;
-    const assigned = actions.findById(this.task.categoryId, categories);
+    const assigned = PagesActions.findById(this.task.categoryId, categories);
 
     return (
       <CategoryAssignList

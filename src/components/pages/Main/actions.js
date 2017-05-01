@@ -1,6 +1,7 @@
-import ramda from 'ramda';
+import Ramda from 'ramda';
+import * as PagesActions from '../actions';
 
-const { filter, prop } = ramda;
+const { filter, prop } = Ramda;
 
 const completedList = filter(prop('done'));
 export const completedPercentage = (tasks) => {
@@ -11,14 +12,13 @@ export const completedPercentage = (tasks) => {
 };
 
 const {
-  reject, propEq, useWith, identity, pipe, contains, flip, propOr, curry,
-  find, map, flatten, concat, adjust, remove, evolve,
-} = ramda;
+  reject, useWith, identity, pipe, contains, flip, propOr, curry,
+  map, flatten, concat, adjust, remove, evolve,
+} = Ramda;
 
 
-const findById = flip(useWith(find, [propEq('id'), identity]));
 const getSubIds = pipe(
-  findById,
+  flip(PagesActions.findById),
   propOr([], 'subIds'),
 );
 
@@ -34,9 +34,9 @@ const idsToRemoveFromList = curry((list, id) => {
   return get(list, id);
 });
 
-export const idsToRemove = flip(idsToRemoveFromList);
+const idsToRemove = flip(idsToRemoveFromList);
 
-export const removeFromParent = (id, list) => {
+const removeFromParent = (id, list) => {
   const item = list.find((item) => item.subIds && item.subIds.includes(id));
 
   if (!item) {
@@ -54,8 +54,8 @@ const containsObjectProp = curry((propName, values, object) =>
   contains(object[propName], values)
 );
 
-export const removeCategoriesTasks = useWith(reject, [containsObjectProp('categoryId'), identity]);
-export const removeByIds = useWith(reject, [containsObjectProp('id'), identity]);
+const removeCategoriesTasks = useWith(reject, [containsObjectProp('categoryId'), identity]);
+const removeByIds = useWith(reject, [containsObjectProp('id'), identity]);
 
 export const removeCategory = (category, categories, tasks) => {
   const categoryId = category.id;

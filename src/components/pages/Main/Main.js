@@ -5,7 +5,7 @@ import QueryString from 'query-string';
 
 import './Main.css';
 
-import * as actions from './actions';
+import * as Actions from './actions';
 
 import { Header } from '../../page-elements/Header';
 import { ProgressBar } from '../../page-elements/ProgressBar';
@@ -39,7 +39,7 @@ export class MainPage extends PureComponent {
   removeCategory(category) {
     const { categories, tasks, setCategories, setTasks } = this.props;
 
-    const result = actions.removeCategory(category, categories, tasks);
+    const result = Actions.removeCategory(category, categories, tasks);
 
     setCategories(result.categories);
     setTasks(result.tasks);
@@ -114,7 +114,7 @@ export class MainPage extends PureComponent {
               actions={ this.filterActions }/>
           </Header>
           <ProgressBar
-            complete={ actions.completedPercentage(this.props.tasks)}/>
+            complete={ Actions.completedPercentage(this.props.tasks)}/>
         </div>
         <TwoRows
           className="page__section-flexible"
