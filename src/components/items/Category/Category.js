@@ -140,14 +140,11 @@ export class Category extends PureComponent {
 
     return (
       <Item
-        { ...{ item, isActive } }
+        item={ item }
+        isActive={ isActive }
         actions={ inEdit ? this.editActions : this.viewActions }>
         <ItemSection/>
-        {
-          inEdit
-            ? this.getEditBody()
-            : this.getViewBody()
-        }
+        { inEdit ? this.getEditBody() : this.getViewBody() }
         <ItemActions>
           { inEdit ? this.getEditToolButtons() : this.getViewToolButtons() }
         </ItemActions>
