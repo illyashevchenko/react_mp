@@ -10,15 +10,17 @@ import { pick } from 'ramda';
 import { Button } from '../../controls/Button';
 import { Pure } from '../../HOC/Pure';
 
-const ActionButton = Pure(({ title, onClick }) => (
+const ActionButton = Pure(({ title, onClick, disabled }) => (
   <Button
     className="ToDoForm__actions-button"
-    onClick={ onClick }>{ title }</Button>
+    onClick={ onClick }
+    disabled={ disabled }>{ title }</Button>
 ));
 
-const { map, concat, pipe, join } = Ramda;
+const { map, concat, pipe, join, filter, identity } = Ramda;
 const getFormClass = concat('ToDoForm__');
 const getFormClasses = pipe(
+  filter(identity),
   map(getFormClass),
   join(' ')
 );
@@ -59,14 +61,17 @@ export class ToDoForm extends PureComponent {
         <div className={ getFormClass('actions') }>
           <ActionButton
             title="Save changes"
-            onClick={ this.confirm }/>
+            onClick={ this.confirm }
+            disabled={ !title }/>
           <ActionButton
             title="Cancel"
             onClick={ this.cancel }/>
         </div>
         <div className={ getFormClass('form') }>
           <input
-            className={ getFormClasses(['form-element', 'form-input', 'form-input--short']) }
+            className={ getFormClasses(
+              ['form-element', 'form-input', 'form-input--short', !title && 'form-input--error']
+            ) }
             type="text"
             value={ title }
             onChange={ this.updateState('title', 'value') }/>
@@ -82,7 +87,7 @@ export class ToDoForm extends PureComponent {
             className={ getFormClasses(['form-element', 'form-input', 'form-input--vertical']) }
             rows="7"
             value={ description }
-            onChange={this.updateState('description', 'value') }/>
+            onChange={ this.updateState('description', 'value') }/>
         </div>
       </form>
     );

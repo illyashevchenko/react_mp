@@ -27,6 +27,17 @@
     }
   }
 
+  &--disabled {
+    //box-shadow: none;
+    opacity: .65;
+    cursor: not-allowed;
+
+    &:hover {
+      border-color: $dark-white;
+      background-color: $white;
+    }
+  }
+
   &--sibling-on-right {
     @include form-element-sibling-on-right;
   }
