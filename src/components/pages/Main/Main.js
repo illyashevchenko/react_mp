@@ -5,7 +5,7 @@ import QueryString from 'query-string';
 
 import './Main.css';
 
-import actions from './actions';
+import * as actions from './actions';
 
 import { Header } from '../../page-elements/Header';
 import { ProgressBar } from '../../page-elements/ProgressBar';
@@ -39,15 +39,20 @@ export class MainPage extends PureComponent {
   removeCategory(category) {
     const { categories, tasks, setCategories, setTasks } = this.props;
 
-    const toRemove = actions.idsToRemove(category.id, categories);
+    const result = actions.removeCategory(category, categories, tasks);
 
-    const cleanedCategories = actions.removeByIds(toRemove, categories);
-    const newCategories = actions.removeFromParent(category.id, cleanedCategories);
+    setCategories(result.categories);
+    setTasks(result.tasks);
 
-    const newTasks = actions.removeCategoriesTasks(toRemove, tasks);
+    this.handleActiveCategoryDeleted(category);
+  }
 
-    setCategories(newCategories);
-    setTasks(newTasks);
+  handleActiveCategoryDeleted(removedCategory) {
+    const { selectCategory, category } = this.props;
+
+    if (removedCategory === category) {
+      selectCategory(null);
+    }
   }
 
   setFilter(filter) {
@@ -91,6 +96,7 @@ export class MainPage extends PureComponent {
     const filter = QueryString.parse(location.search);
 
     return {
+      search: '',
       ...filter,
       onlyDone: filter.onlyDone === 'true',
     };

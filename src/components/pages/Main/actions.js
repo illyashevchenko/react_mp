@@ -3,7 +3,7 @@ import ramda from 'ramda';
 const { filter, prop } = ramda;
 
 const completedList = filter(prop('done'));
-const completedPercentage = (tasks) => {
+export const completedPercentage = (tasks) => {
   const completed = completedList(tasks).length;
   const all = tasks.length;
 
@@ -23,10 +23,10 @@ const getSubIds = pipe(
 );
 
 
-const idsToRemove = curry((list, id) => {
+const idsToRemoveFromList = curry((list, id) => {
   const get = pipe(
     getSubIds,
-    map(idsToRemove(list)),
+    map(idsToRemoveFromList(list)),
     concat([id]),
     flatten
   );
@@ -34,7 +34,9 @@ const idsToRemove = curry((list, id) => {
   return get(list, id);
 });
 
-const removeFromParent = (id, list) => {
+export const idsToRemove = flip(idsToRemoveFromList);
+
+export const removeFromParent = (id, list) => {
   const item = list.find((item) => item.subIds && item.subIds.includes(id));
 
   if (!item) {
@@ -52,22 +54,18 @@ const containsObjectProp = curry((propName, values, object) =>
   contains(object[propName], values)
 );
 
-const removeByIds = useWith(reject, [containsObjectProp('id'), identity]);
+export const removeCategoriesTasks = useWith(reject, [containsObjectProp('categoryId'), identity]);
+export const removeByIds = useWith(reject, [containsObjectProp('id'), identity]);
 
-const removeCategory = (item, list) => {
-  const withoutSub = removeFromParent(item.id, list);
-  const toRemove = idsToRemove(list, item.id);
+export const removeCategory = (category, categories, tasks) => {
+  const categoryId = category.id;
+  const toRemove = idsToRemove(categoryId, categories);
 
-  return removeByIds(toRemove, withoutSub);
+  const cleanedCategories = removeByIds(toRemove, categories);
+
+  return {
+    categories: removeFromParent(category.id, cleanedCategories),
+    tasks: removeCategoriesTasks(toRemove, tasks),
+  };
 };
 
-const removeCategoriesTasks = useWith(reject, [containsObjectProp('categoryId'), identity]);
-
-export default {
-  completedPercentage,
-  removeCategory,
-  removeFromParent,
-  idsToRemove: flip(idsToRemove),
-  removeByIds,
-  removeCategoriesTasks,
-};
