@@ -6,6 +6,7 @@ import QueryString from 'query-string';
 import './Main.css';
 
 import * as Actions from './actions';
+import * as PageActions from '../actions';
 
 import { Header } from '../../page-elements/Header';
 import { ProgressBar } from '../../page-elements/ProgressBar';
@@ -22,11 +23,11 @@ export class MainPage extends PureComponent {
       set: this.setFilter.bind(this),
     };
 
-    const { setCategories, selectCategory, setTasks } = props;
+    const { setCategories, setTasks } = props;
 
     this.categoriesActions = {
       set: setCategories,
-      select: selectCategory,
+      select: this.selectCategory.bind(this),
       remove: this.removeCategory.bind(this),
     };
 
@@ -34,6 +35,26 @@ export class MainPage extends PureComponent {
       set: setTasks,
       select: this.selectToDo.bind(this),
     };
+  }
+
+  selectCategory(category) {
+    this.props.selectCategory(category);
+    this.setQueryParams({ categoryId: category.id });
+  }
+
+  setFilter(filter) {
+    this.setQueryParams(filter)
+  }
+
+  setQueryParams(newParams) {
+    const { history, location: { pathname, search: currentSearch } } = this.props;
+
+    const currentParams = QueryString.parse(currentSearch);
+    const search = QueryString.stringify(
+      Object.assign(currentParams, newParams)
+    );
+
+    history.push({ pathname, search });
   }
 
   removeCategory(category) {
@@ -55,11 +76,19 @@ export class MainPage extends PureComponent {
     }
   }
 
-  setFilter(filter) {
-    const { history: { location: { pathname } } } = this.props;
-    const search = QueryString.stringify(filter);
+  componentDidMount() {
+    this.selectCategoryFromLocation();
 
-    this.props.history.push({ pathname, search });
+  }
+
+  selectCategoryFromLocation() {
+    const { location: { search }, selectCategory, categories } = this.props;
+    const categoryId = QueryString.parse(search).categoryId;
+    const category = PageActions.findById(categoryId, categories);
+
+    if (category) {
+      selectCategory(category);
+    }
   }
 
   createCategoryList() {
