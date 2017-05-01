@@ -1,4 +1,10 @@
-import { stubData } from './stub-data';
+import { combineReducers } from 'redux';
 
-export const godReducer = (state = stubData, action) =>
-console.log(action) || state;
+import { categories, category } from './categories';
+import { tasks } from './tasks';
+
+export const godReducer = combineReducers({
+  categories,
+  category,
+  tasks,
+});
