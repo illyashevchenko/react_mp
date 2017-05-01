@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 
 import {
@@ -9,61 +9,18 @@ import {
 import { MainPage } from '../pages/Main';
 import { ToDoPage } from '../pages/ToDo';
 
-import data from './data';
+export const App = () => (
+  <BrowserRouter>
+    <div className="App">
+      <Route
+        exact
+        path="/"
+        component={ MainPage }/>
 
-export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.init();
+      <Route
+        path="/edit/:taskId"
+        render={ ToDoPage }/>
 
-    this.setCategories = this.setCategories.bind(this);
-    this.setTasks = this.setTasks.bind(this);
-    this.selectCategory = this.selectCategory.bind(this);
-  }
-
-  init() {
-    this.state = data;
-  }
-
-  setCategories(categories) {
-    this.setState({ categories });
-  }
-
-  setTasks(tasks) {
-    this.setState({ tasks });
-  }
-
-  selectCategory(category) {
-    this.setState({ category });
-  }
-
-  render() {
-    return (
-      <BrowserRouter>
-        <div className="App">
-          <Route
-            exact
-            path="/"
-            render={ (props) =>
-              <MainPage
-                { ...this.state }
-                setCategories={ this.setCategories }
-                setTasks={ this.setTasks }
-                selectCategory={ this.selectCategory }
-                { ...props }/>
-            }/>
-
-          <Route
-            path="/edit/:taskId"
-            render={ (props) =>
-              <ToDoPage
-                { ...this.state }
-                { ...props }
-                setTasks={ this.setTasks }
-              />
-            }/>
-        </div>
-      </BrowserRouter>
-    );
-  }
-}
+    </div>
+  </BrowserRouter>
+);

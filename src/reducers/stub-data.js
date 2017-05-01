@@ -1,4 +1,4 @@
-export default {
+export const stubData = {
   category: null,
   categories: [
     { title: 'Category1', id: 1 },
