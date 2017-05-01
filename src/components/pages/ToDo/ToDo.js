@@ -50,9 +50,7 @@ export class ToDoPage extends PureComponent {
   }
 
   goToList() {
-    this.props.history.push({
-      pathname: '/',
-    });
+    this.props.history.goBack();
   }
 
   createCategoryList() {
