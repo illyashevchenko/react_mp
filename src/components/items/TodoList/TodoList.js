@@ -27,7 +27,7 @@ export class TodoList extends PureComponent {
       return;
     }
 
-    const { actions: { set }, categoryId, tasks } = this.props;
+    const { actions: { set }, filter: { categoryId }, tasks } = this.props;
     const toDo = Actions.create(title, categoryId);
 
     set([toDo, ...tasks]);
@@ -40,47 +40,54 @@ export class TodoList extends PureComponent {
   }
 
   getList() {
-    const {
-      filter: { search, onlyDone },
-      categoryId,
-      tasks,
-    } = this.props;
+    const { filter, tasks } = this.props;
 
-    if (!categoryId) {
+    if (!filter.categoryId) {
       return emptyList;
     }
 
-    const filter = { search, onlyDone, categoryId };
     return Actions.filtered(filter, tasks);
   }
 
   render() {
-    return this.props.categoryId
-      ? (
-        <div className="TodoList">
-          <ActionInput
-            className="TodoList__input"
-            placeholder="Enter title"
-            actionTitle="Add"
-            onAct={ this.add }/>
-          <ItemList
-            className="TodoList__list"
-            list={ this.getList() }
-            actions={ this.taskActions }
-            Element={ ToDo }
-            keyPath="id"/>
-        </div>
-      )
-      : <div>There is no active category. Please select one</div>;
+    const list = this.getList();
+    const { filter: { categoryId } } = this.props;
+
+    if (!categoryId) {
+      return <div>No category selected</div>;
+    }
+
+
+    return (
+      <div className="TodoList">
+        <ActionInput
+          className="TodoList__input"
+          placeholder="Enter title"
+          actionTitle="Add"
+          onAct={ this.add }/>
+
+        { list.length
+          ? (
+            <ItemList
+              className="TodoList__list"
+              list={ list }
+              actions={ this.taskActions }
+              Element={ ToDo }
+              keyPath="id"/>
+          )
+          : <div>No tasks matching selected filter were found</div>
+        }
+      </div>
+    );
   }
 }
 
 TodoList.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
-  categoryId: PropTypes.number,
   filter: PropTypes.shape({
     search: PropTypes.string,
     onlyDone: PropTypes.bool,
+    categoryId: PropTypes.number,
   })
     .isRequired,
   actions: PropTypes.shape({

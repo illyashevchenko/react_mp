@@ -83,15 +83,17 @@ export class MainPage extends PureComponent {
     return (
       <TodoList
         tasks={ tasks }
-        categoryId={ filter.categoryId }
         filter={ filter }
         actions={ this.todoActions }/>
     );
   }
 
   selectToDo(item) {
-    this.props.history.push({
+    const { location, history } = this.props;
+
+    history.push({
       pathname: `/edit/${ item.id }`,
+      search: location.search,
     });
   }
 
