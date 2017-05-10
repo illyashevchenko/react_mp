@@ -138,7 +138,6 @@ MainPage.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
 
   setCategories: PropTypes.func.isRequired,
-  selectCategory: PropTypes.func.isRequired,
   setTasks: PropTypes.func.isRequired,
   removeCategories: PropTypes.func.isRequired,
   match: PropTypes.shape({
