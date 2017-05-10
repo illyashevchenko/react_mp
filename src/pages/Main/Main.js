@@ -57,12 +57,12 @@ export class MainPage extends PureComponent {
   }
 
   removeCategory(category) {
-    const { categories, tasks, setCategories, setTasks } = this.props;
+    const { categories, removeCategories } = this.props;
 
-    const result = Actions.removeCategory(category, categories, tasks);
+    const categoryId = category.id;
+    const toRemoveIds = Actions.idsToRemove(categoryId, categories);
 
-    setCategories(result.categories);
-    setTasks(result.tasks);
+    removeCategories(categoryId, toRemoveIds);
   }
 
   createCategoryList({ categoryId }) {
@@ -140,6 +140,7 @@ MainPage.propTypes = {
   setCategories: PropTypes.func.isRequired,
   selectCategory: PropTypes.func.isRequired,
   setTasks: PropTypes.func.isRequired,
+  removeCategories: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({}),
   }),
