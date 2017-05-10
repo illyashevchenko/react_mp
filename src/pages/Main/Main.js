@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import QueryString from 'query-string';
 
+import R from 'ramda';
+
 import './Main.css';
 
 import * as Actions from './actions';
@@ -23,13 +25,12 @@ export class MainPage extends PureComponent {
       set: this.setFilter.bind(this),
     };
 
-    const { setCategories, setTasks } = props;
+    const { setTasks, categories } = props.actions;
 
-    this.categoriesActions = {
-      set: setCategories,
+    this.categoriesActions = Object.assign({
       select: this.selectCategory.bind(this),
       remove: this.removeCategory.bind(this),
-    };
+    }, R.omit(['remove'], categories));
 
     this.todoActions = {
       set: setTasks,
@@ -57,12 +58,12 @@ export class MainPage extends PureComponent {
   }
 
   removeCategory(category) {
-    const { categories, removeCategories } = this.props;
+    const { categories, actions: { categories: { remove } } } = this.props;
 
     const categoryId = category.id;
     const toRemoveIds = Actions.idsToRemove(categoryId, categories);
 
-    removeCategories(categoryId, toRemoveIds);
+    remove(categoryId, toRemoveIds);
   }
 
   createCategoryList({ categoryId }) {
@@ -137,9 +138,16 @@ MainPage.propTypes = {
   categoryId: PropTypes.number,
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
 
-  setCategories: PropTypes.func.isRequired,
-  setTasks: PropTypes.func.isRequired,
-  removeCategories: PropTypes.func.isRequired,
+  actions: PropTypes.shape({
+    categories: PropTypes.shape({
+      remove: PropTypes.func.isRequired,
+      addNested: PropTypes.func.isRequired,
+      addRoot: PropTypes.func.isRequired,
+      editConfirm: PropTypes.func.isRequired,
+      editCancel: PropTypes.func.isRequired,
+    }),
+    setTasks: PropTypes.func.isRequired,
+  }),
   match: PropTypes.shape({
     params: PropTypes.shape({}),
   }),

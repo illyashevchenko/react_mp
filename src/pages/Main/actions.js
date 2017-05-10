@@ -36,7 +36,7 @@ const idsToRemoveFromList = curry((list, id) => {
 
 export const idsToRemove = flip(idsToRemoveFromList);
 
-export const removeFromParent = curry((id, list) => {
+const removeFromParent = curry((id, list) => {
   const item = list.find((item) => item.subIds && item.subIds.includes(id));
 
   if (!item) {
@@ -55,4 +55,23 @@ const containsObjectProp = curry((propName, values, object) =>
 );
 
 export const removeCategoriesTasks = useWith(reject, [containsObjectProp('categoryId'), identity]);
-export const removeByIds = useWith(reject, [containsObjectProp('id'), identity]);
+const removeByIds = useWith(reject, [containsObjectProp('id'), identity]);
+
+export const cleanCategories = (categoryIds, categoryId, categories) => {
+  const cleanCategoriesPipe = pipe(
+    removeByIds(categoryIds),
+    removeFromParent(categoryId)
+  );
+
+  return cleanCategoriesPipe(categories);
+};
+
+export const removeNew = (category, categories) => {
+  const categoryId = category.id;
+  const removePipe = pipe(
+    removeByIds([categoryId]),
+    removeFromParent(categoryId)
+  );
+
+  return removePipe(categories);
+};
