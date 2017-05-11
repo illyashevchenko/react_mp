@@ -134,7 +134,6 @@ export class MainPage extends PureComponent {
 
 MainPage.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  categoryId: PropTypes.number,
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
 
   actions: PropTypes.shape({
