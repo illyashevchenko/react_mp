@@ -5,8 +5,6 @@ import Ramda from 'ramda';
 
 import './TodoForm.css';
 
-import { pick } from 'ramda';
-
 import { Button } from '../../controls/Button';
 import { Pure } from '../../HOC/Pure';
 
@@ -25,47 +23,27 @@ const getFormClasses = pipe(
   join(' ')
 );
 
-const pickProps = pick(['title', 'done', 'description']);
-
 export class ToDoForm extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = pickProps(props.item);
-
-    this.updateState = this.updateState.bind(this);
-
-    this.confirm = this.getAction('confirm');
-    this.cancel = this.getAction('cancel');
-  }
-
-  updateState(prop, path) {
+  getUpdater(valueName, targetProp) {
     return (event) => {
-      this.setState({ [prop]: event.target[path] })
+      this.props.actions.update({ [valueName]: event.target[targetProp] })
     }
   }
 
-  getAction(name) {
-    const { actions, item } = this.props;
-
-    return () => {
-      actions[name](pickProps(this.state), item);
-    };
-  }
-
   render() {
-    const { done, title, description } = this.state;
+    const { done, title, description } = this.props.values;
+    const { confirm, cancel } = this.props.actions;
 
     return (
       <form className="ToDoForm">
         <div className={ getFormClass('actions') }>
           <ActionButton
             title="Save changes"
-            onClick={ this.confirm }
+            onClick={ confirm }
             disabled={ !title }/>
           <ActionButton
             title="Cancel"
-            onClick={ this.cancel }/>
+            onClick={ cancel }/>
         </div>
         <div className={ getFormClass('form') }>
           <input
@@ -74,20 +52,20 @@ export class ToDoForm extends PureComponent {
             ) }
             type="text"
             value={ title }
-            onChange={ this.updateState('title', 'value') }/>
+            onChange={ this.getUpdater('title', 'value') }/>
           <label className={ getFormClasses(['form-element', 'form-checkbox']) }>
             <input
               type="checkbox"
               className={ getFormClass('form-checkbox-input') }
               checked={ done }
-              onChange={ this.updateState('done', 'checked') }/>
+              onChange={ this.getUpdater('done', 'checked') }/>
             Done
           </label>
           <textarea
             className={ getFormClasses(['form-element', 'form-input', 'form-input--vertical']) }
             rows="7"
             value={ description }
-            onChange={ this.updateState('description', 'value') }/>
+            onChange={ this.getUpdater('description', 'value') }/>
         </div>
       </form>
     );
@@ -95,9 +73,14 @@ export class ToDoForm extends PureComponent {
 }
 
 ToDoForm.propTypes = {
-  item: PropTypes.object.isRequired,
+  values: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    done: PropTypes.bool,
+    description: PropTypes.string,
+  }),
   actions: PropTypes.shape({
     confirm: PropTypes.func.isRequired,
     cancel: PropTypes.func.isRequired,
+    update: PropTypes.func.isRequired,
   }),
 };

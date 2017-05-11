@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import Ramda from 'ramda';
 
 import './ToDo.css';
 
@@ -8,8 +9,10 @@ import { CategoryAssignList } from '../../components/items/CategoryAssignList';
 import { ToDoForm } from '../../components/items/ToDoForm';
 import { TwoRows } from '../../components/layouts/TwoRows';
 
-import * as Actions from './actions';
 import * as PagesActions from '../actions';
+
+const { pick, merge } = Ramda;
+const pickProps = pick(['title', 'done', 'description', 'categoryId']);
 
 export class ToDoPage extends PureComponent {
   constructor(props) {
@@ -22,10 +25,13 @@ export class ToDoPage extends PureComponent {
     this.formActions = {
       cancel: this.cancel.bind(this),
       confirm: this.confirm.bind(this),
+      update: this.updateValues.bind(this),
     };
 
+    const task = this.getTask();
     this.state = {
-      task: this.getTask(),
+      task,
+      values: pickProps(task),
     };
   }
 
@@ -35,18 +41,18 @@ export class ToDoPage extends PureComponent {
   }
 
   assign(category) {
-    this.setState({
-      task: Actions.setCategory(category, this.state.task),
-    });
+    this.updateValues({ categoryId: category.id });
   }
 
   cancel() {
     this.goToList();
   }
 
-  confirm(newFields) {
+  confirm() {
     const { modifyTask } = this.props.actions;
-    modifyTask(this.state.task, newFields);
+    const { task, values } = this.state;
+
+    modifyTask(task, values);
 
     this.goToList();
   }
@@ -55,9 +61,17 @@ export class ToDoPage extends PureComponent {
     this.props.history.goBack();
   }
 
+  updateValues(values) {
+    this.setState({
+      values: merge(this.state.values, values),
+    })
+  }
+
   createCategoryList() {
     const { categories } = this.props;
-    const assigned = PagesActions.findById(this.state.task.categoryId, categories);
+    const { categoryId } = this.state.values;
+
+    const assigned = PagesActions.findById(categoryId, categories);
 
     return (
       <CategoryAssignList
@@ -70,8 +84,8 @@ export class ToDoPage extends PureComponent {
   createTaskForm() {
     return (
       <ToDoForm
-        item={ this.state.task }
-        actions={ this.formActions }/>
+        actions={ this.formActions }
+        values={ this.state.values }/>
     );
   }
 
