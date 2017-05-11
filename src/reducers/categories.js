@@ -1,14 +1,53 @@
 import { createReducer } from './create-reducer';
 import Ramda from 'ramda';
 
-import { cleanCategories, removeNew } from '../pages/Main/actions';
+import { containsObjectProp } from './helpers';
+
+const { useWith, reject, identity } = Ramda;
+const removeByIds = useWith(reject, [containsObjectProp('id'), identity]);
+
+const { curry, evolve, adjust, remove } = Ramda;
+const removeFromParent = curry((id, list) => {
+  const item = list.find((item) => item.subIds && item.subIds.includes(id));
+
+  if (!item) {
+    return list;
+  }
+
+  const subIdIndex = item.subIds.indexOf(id);
+  const index = list.indexOf(item);
+
+  const removeNested = (item) => evolve({ subIds: remove(subIdIndex, 1) }, item);
+  return adjust(removeNested, index, list);
+});
+
+const { pipe } = Ramda;
+
+export const cleanCategories = (categoryIds, categoryId, categories) => {
+  const cleanCategoriesPipe = pipe(
+    removeByIds(categoryIds),
+    removeFromParent(categoryId)
+  );
+
+  return cleanCategoriesPipe(categories);
+};
+
+export const removeNew = (category, categories) => {
+  const categoryId = category.id;
+  const removePipe = pipe(
+    removeByIds([categoryId]),
+    removeFromParent(categoryId)
+  );
+
+  return removePipe(categories);
+};
 
 const createCategory = (title) => ({
   title,
   id: Date.now(),
 });
 
-const { useWith, prepend, identity } = Ramda;
+const { prepend } = Ramda;
 const addRoot = useWith(prepend, [createCategory, identity]);
 
 const createCategoryWithoutTitle = () => ({
@@ -18,7 +57,7 @@ const createCategoryWithoutTitle = () => ({
 });
 
 
-const { append, over, lensProp, findIndex, equals, adjust, pipe } = Ramda;
+const { append, over, lensProp, findIndex, equals } = Ramda;
 
 const addSubId = pipe(
   prepend,

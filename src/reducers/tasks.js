@@ -1,7 +1,10 @@
 import { createReducer } from './create-reducer';
 import Ramda from 'ramda';
 
-import { removeCategoriesTasks } from '../pages/Main/actions';
+import { containsObjectProp } from './helpers';
+
+const { useWith, reject, identity } = Ramda;
+const removeCategoriesTasks = useWith(reject, [containsObjectProp('categoryId'), identity]);
 
 const create = (title, categoryId) => ({
   title,
