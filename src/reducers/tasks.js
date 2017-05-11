@@ -18,6 +18,15 @@ const { lensProp, over, not, indexOf, update, converge, nthArg, pipe } = Ramda;
 const toggleDoneProp = over(lensProp('done'), not);
 const toggleDone = converge(update, [indexOf, pipe(nthArg(0), toggleDoneProp), nthArg(1)]);
 
+const { findIndex, propEq, merge } = Ramda;
+
+const modifyTask = (list, item, changes) =>
+  update(
+    findIndex(propEq('id', item.id), list),
+    merge(item, changes),
+    list
+  );
+
 export const tasks = createReducer([], {
   CATEGORIES_REMOVE: (state, { categoryIds }) => removeCategoriesTasks(categoryIds, state),
 
@@ -28,4 +37,6 @@ export const tasks = createReducer([], {
   ),
 
   TASKS_TOGGLE_DONE: (state, { task }) => toggleDone(task, state),
+
+  TASKS_MODIFY: (state, { task, changes }) => modifyTask(state, task, changes),
 });

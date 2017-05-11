@@ -45,15 +45,10 @@ export class ToDoPage extends PureComponent {
   }
 
   confirm(newFields) {
-    this.setNewTasks(newFields);
-    this.goToList();
-  }
+    const { modifyTask } = this.props.actions;
+    modifyTask(this.state.task, newFields);
 
-  setNewTasks(newFields) {
-    const { setTasks, tasks } = this.props;
-    setTasks(
-      Actions.modifyTask(tasks, this.state.task, newFields)
-    );
+    this.goToList();
   }
 
   goToList() {
@@ -98,7 +93,9 @@ export class ToDoPage extends PureComponent {
 ToDoPage.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setTasks: PropTypes.func.isRequired,
+  actions: PropTypes.shape({
+    modifyTask: PropTypes.func.isRequired,
+  }),
   match: PropTypes.shape({
     params: PropTypes.shape({
       taskId: PropTypes.string.isRequired,
