@@ -25,17 +25,16 @@ export class MainPage extends PureComponent {
       set: this.setFilter.bind(this),
     };
 
-    const { setTasks, categories } = props.actions;
+    const { tasks, categories } = props.actions;
 
     this.categoriesActions = Object.assign({
       select: this.selectCategory.bind(this),
       remove: this.removeCategory.bind(this),
     }, R.omit(['remove'], categories));
 
-    this.todoActions = {
-      set: setTasks,
+    this.todoActions = Object.assign({
       select: this.selectToDo.bind(this),
-    };
+    }, tasks);
   }
 
   selectCategory(category) {
@@ -146,7 +145,10 @@ MainPage.propTypes = {
       editConfirm: PropTypes.func.isRequired,
       editCancel: PropTypes.func.isRequired,
     }),
-    setTasks: PropTypes.func.isRequired,
+    tasks: PropTypes.shape({
+      add: PropTypes.func.isRequired,
+      toggleDone: PropTypes.func.isRequired,
+    }),
   }),
   match: PropTypes.shape({
     params: PropTypes.shape({}),

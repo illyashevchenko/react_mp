@@ -8,7 +8,10 @@ const mapStateToProps = useWith(merge, [pick(storeProps), identity]);
 
 const mapDispatchToProps = (dispatch) => ({
   actions: {
-    setTasks: (tasks) => dispatch({ type: 'TASKS_SET', list: tasks }),
+    tasks: {
+      add: (categoryId, title) => dispatch({ type: 'TASKS_ADD', categoryId, title }),
+      toggleDone: (task) => dispatch({ type: 'TASKS_TOGGLE_DONE', task }),
+    },
     categories: {
       remove: (categoryId, categoryIds) => dispatch({ type: 'CATEGORIES_REMOVE', categoryIds, categoryId }),
       addNested: (parent) => dispatch({ type: 'CATEGORIES_ADD_NESTED', parent }),

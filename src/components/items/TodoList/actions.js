@@ -1,6 +1,6 @@
-import ramda from 'ramda'
+import Ramda from 'ramda'
 
-const { test, where, equals, pipe, filter, useWith, identity, T } = ramda;
+const { test, equals, T } = Ramda;
 
 const stringTest = (string) =>
   test(new RegExp(string, 'ig'));
@@ -11,20 +11,7 @@ const whereMatcher = ({ search, onlyDone, categoryId }) => ({
   categoryId: equals(categoryId),
 });
 
+const { pipe, where, useWith, filter, identity } = Ramda;
+
 const matcher = pipe(whereMatcher, where);
-const filtered = useWith(filter, [matcher, identity]);
-
-
-const create = (title, categoryId) => ({
-  title,
-  categoryId,
-  done: false,
-  id: Date.now(),
-});
-
-const { lensProp, over, not, indexOf, update, converge, nthArg } = ramda;
-
-const toggleDoneProp = over(lensProp('done'), not);
-const toggleDone = converge(update, [indexOf, pipe(nthArg(0), toggleDoneProp), nthArg(1)]);
-
-export default { filtered, create, toggleDone };
+export const filtered = useWith(filter, [matcher, identity]);

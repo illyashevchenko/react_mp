@@ -7,7 +7,7 @@ import { ItemList } from '../ItemList';
 import { ToDo } from '../ToDo';
 import { ActionInput } from '../../controls/ActionInput';
 
-import Actions from './actions';
+import * as Actions from './actions';
 
 const emptyList = [];
 
@@ -17,26 +17,14 @@ export class TodoList extends PureComponent {
 
     this.add = this.add.bind(this);
     this.taskActions = {
-      toggle: this.toggleDone.bind(this),
+      toggle: props.actions.toggleDone,
       edit: props.actions.select,
     };
   }
 
   add(title) {
-    if (!title) {
-      return;
-    }
-
-    const { actions: { set }, filter: { categoryId }, tasks } = this.props;
-    const toDo = Actions.create(title, categoryId);
-
-    set([toDo, ...tasks]);
-  }
-
-  toggleDone(item) {
-    const { actions: { set }, tasks } = this.props;
-
-    set(Actions.toggleDone(item, tasks));
+    const { actions: { add }, filter: { categoryId } } = this.props;
+    add(categoryId, title);
   }
 
   getList() {
@@ -50,13 +38,13 @@ export class TodoList extends PureComponent {
   }
 
   render() {
-    const list = this.getList();
     const { filter: { categoryId } } = this.props;
 
     if (!categoryId) {
       return <div>No category selected</div>;
     }
 
+    const list = this.getList();
 
     return (
       <div className="TodoList">
@@ -91,7 +79,8 @@ TodoList.propTypes = {
   })
     .isRequired,
   actions: PropTypes.shape({
-    set: PropTypes.func.isRequired,
+    toggleDone: PropTypes.func.isRequired,
+    add: PropTypes.func.isRequired,
     select: PropTypes.func.isRequired,
   })
     .isRequired,
