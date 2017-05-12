@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "immutable": "^3.8.1",
     "prop-types": "^15.5.8",
     "query-string": "^4.3.4",
     "ramda": "^0.23.0",
@@ -13,11 +12,9 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
-    "redux-logger": "^3.0.1",
-    "redux-thunk": "^2.2.0"
+    "redux-logger": "^3.0.1"
   },
   "devDependencies": {
-    "@kadira/storybook": "^2.21.0",
     "husky": "^0.13.3",
     "node-sass": "^4.5.2",
     "npm-run-all": "^4.0.2",
@@ -29,14 +26,13 @@
     "start": "npm run build-svg && npm-run-all -p watch-css start-js",
     "build": "npm run build-svg && npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "coverage": "npm test -- --coverage",
     "eject": "react-scripts eject",
     "start-js": "react-scripts start",
     "build-css": "node-sass src/ -o src/",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "lint": "eslint ./src",
     "precommit": "npm run lint",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public",
     "build-svg": "node tools/svg-sprite.js"
   }
 }
