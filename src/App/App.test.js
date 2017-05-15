@@ -1,8 +1,29 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { App } from './App';
+import { shallow } from 'enzyme';
 
-xit('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+import { App } from './';import {
+  BrowserRouter,
+  Route,
+} from 'react-router-dom'
+
+const routeCount = 2;
+
+describe('basically', () => {
+  let rendered;
+
+  beforeEach(() => {
+    rendered = shallow(
+      <App />
+    );
+  });
+
+  it('should render <BrowserRouter> element', () => {
+    const wrapper = rendered.find(BrowserRouter);
+    expect(wrapper.length).toBe(1);
+  });
+
+  it('should render proper count of <Route> elements', () => {
+    const wrapper = rendered.find(Route);
+    expect(wrapper.length).toBe(routeCount);
+  });
 });

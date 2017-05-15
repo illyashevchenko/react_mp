@@ -34,8 +34,9 @@ const ItemRender = (props) => (
   </div>
 );
 
+export const Item = Pure(ItemRender);
 
-ItemRender.propTypes = {
+Item.propTypes = {
   size: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   isActive: PropTypes.bool,
@@ -43,8 +44,6 @@ ItemRender.propTypes = {
     select: PropTypes.func,
   }),
 };
-
-export const Item = Pure(ItemRender);
 
 export const ItemSection = Pure(
   (props) => (

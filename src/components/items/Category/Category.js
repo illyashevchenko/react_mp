@@ -158,5 +158,9 @@ Category.propTypes = {
   isActive: PropTypes.bool.isRequired,
   actions: PropTypes.shape({
     select: PropTypes.func.isRequired,
+    confirm: PropTypes.func.isRequired,
+    cancel: PropTypes.func.isRequired,
+    remove: PropTypes.func.isRequired,
+    addNested: PropTypes.func.isRequired,
   }),
 };

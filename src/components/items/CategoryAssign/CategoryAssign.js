@@ -30,6 +30,7 @@ export const CategoryAssign = Pure(CategoryAssignRender);
 
 CategoryAssign.propTypes = {
   item: PropTypes.object.isRequired,
+  isActive: PropTypes.bool,
   actions: PropTypes.shape({
     assign: PropTypes.func.isRequired,
   }),
