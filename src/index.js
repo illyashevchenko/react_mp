@@ -10,7 +10,7 @@ import { godReducer } from './reducers';
 
 import { stubData } from './stub-data';
 
-import SvgLib from './components/assets/SvgLib';
+import { SvgLib } from './components/assets';
 import './index.css';
 
 import './components/assets';

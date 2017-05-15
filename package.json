@@ -1,6 +1,6 @@
 {
   "name": "react_mp",
-  "version": "0.1.0",
+  "vkkersion": "0.1.0",
   "private": true,
   "dependencies": {
     "prop-types": "^15.5.8",
@@ -15,11 +15,13 @@
     "redux-logger": "^3.0.1"
   },
   "devDependencies": {
+    "enzyme": "^2.8.2",
     "husky": "^0.13.3",
     "node-sass": "^4.5.2",
     "npm-run-all": "^4.0.2",
     "raw-loader": "^0.5.1",
     "react-scripts": "0.9.5",
+    "react-test-renderer": "^15.5.4",
     "svg-sprite": "^1.3.6"
   },
   "scripts": {

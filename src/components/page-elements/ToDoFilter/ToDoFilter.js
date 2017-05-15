@@ -24,6 +24,7 @@ const ToDoFilterRender = ({ filter, actions: { set } }) =>
       Show done
     </label>
     <input
+      type="text"
       className="ToDoFilter__block ToDoFilter__input"
       placeholder="Search ..."
       value={ filter.search }

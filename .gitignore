@@ -8,6 +8,7 @@ src/**/*.css
 
 # testing
 /coverage
+jest-extracted-config.json
 
 # production
 /build
