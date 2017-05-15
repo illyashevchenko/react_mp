@@ -4,16 +4,8 @@ import PropTypes from 'prop-types';
 import Ramda from 'ramda';
 
 import './TodoForm.css';
+import { ActionButton } from './ActionButton';
 
-import { Button } from '../../controls/Button';
-import { Pure } from '../../HOC/Pure';
-
-const ActionButton = Pure(({ title, onClick, disabled }) => (
-  <Button
-    className="ToDoForm__actions-button"
-    onClick={ onClick }
-    disabled={ disabled }>{ title }</Button>
-));
 
 const { map, concat, pipe, join, filter, identity } = Ramda;
 const getFormClass = concat('ToDoForm__');
