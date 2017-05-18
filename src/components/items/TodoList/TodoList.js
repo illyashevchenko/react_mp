@@ -7,7 +7,7 @@ import { ItemList } from '../ItemList';
 import { ToDo } from '../ToDo';
 import { ActionInput } from '../../controls/ActionInput';
 
-import * as Actions from './actions';
+import * as Actions from '../../../models/tasks';
 
 const emptyList = [];
 

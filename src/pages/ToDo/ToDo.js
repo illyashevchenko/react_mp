@@ -9,7 +9,7 @@ import { CategoryAssignList } from '../../components/items/CategoryAssignList';
 import { ToDoForm } from '../../components/items/ToDoForm';
 import { TwoRows } from '../../components/layouts/TwoRows';
 
-import * as PagesActions from '../actions';
+import * as Helpers from '../../models/helpers';
 
 const { pick, merge } = Ramda;
 const pickProps = pick(['title', 'done', 'description', 'categoryId']);
@@ -37,7 +37,7 @@ export class ToDoPage extends PureComponent {
 
   getTask() {
     const { tasks, match: { params } } = this.props;
-    return PagesActions.findById(params.taskId, tasks);
+    return Helpers.findById(params.taskId, tasks);
   }
 
   assign(category) {
@@ -71,7 +71,7 @@ export class ToDoPage extends PureComponent {
     const { categories } = this.props;
     const { categoryId } = this.state.values;
 
-    const assigned = PagesActions.findById(categoryId, categories);
+    const assigned = Helpers.findById(categoryId, categories);
 
     return (
       <CategoryAssignList

@@ -6,7 +6,7 @@ import './CategoryList.css';
 import { ItemList } from '../ItemList';
 import { Pure } from '../../HOC/Pure';
 
-import Actions from './actions';
+import * as Actions from '../../../models/categories';
 
 export const CategoryListContainer = Pure(({ children }) => (
   <div className="CategoryList">

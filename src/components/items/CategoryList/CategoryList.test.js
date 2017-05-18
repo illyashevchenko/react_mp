@@ -4,21 +4,37 @@ import { shallow } from 'enzyme';
 import { CategoryListContainer, CategoryList } from './';
 import { ItemList } from '../ItemList';
 
+const Element = () => ({});
 
 describe('defines CategoryList which', () => {
-  let rendered;
-
-  beforeEach(() => {
-    rendered = shallow(
+  it('should render <ItemList> element', () => {
+    const rendered = shallow(
       <CategoryList
-        Element={ () => '' } active={ {} } actions={ {} } categories={ [] }/>
+        Element={ Element }
+        active={ {} }
+        actions={ {} }
+        categories={ [] }/>
     );
-  });
-
-  xit('should render <ItemList> element', () => {
     const wrapper = rendered.find(ItemList);
     expect(wrapper.props()).toEqual(expect.objectContaining({
-      Element: () => '',
+      Element,
+      list: [],
+      active: {},
+      actions: {},
+    }));
+  });
+
+  it('should handle tree structure while rendering <ItemList> element', () => {
+    const rendered = shallow(
+      <CategoryList
+        Element={ Element }
+        active={ {} }
+        actions={ {} }
+        categories={ [] }/>
+    );
+    const wrapper = rendered.find(ItemList);
+    expect(wrapper.props()).toEqual(expect.objectContaining({
+      Element,
       list: [],
       active: {},
       actions: {},

@@ -7,8 +7,9 @@ import R from 'ramda';
 
 import './Main.css';
 
-import * as Actions from './actions';
-import * as PageActions from '../actions';
+import * as Categories from '../../models/categories';
+import * as Tasks from '../../models/tasks';
+import * as Helpers from '../../models/helpers';
 
 import { Header } from '../../components/page-elements/Header';
 import { ProgressBar } from '../../components/page-elements/ProgressBar';
@@ -60,14 +61,14 @@ export class MainPage extends PureComponent {
     const { categories, actions: { categories: { remove } } } = this.props;
 
     const categoryId = category.id;
-    const toRemoveIds = Actions.idsToRemove(categoryId, categories);
+    const toRemoveIds = Categories.idsToRemove(categoryId, categories);
 
     remove(categoryId, toRemoveIds);
   }
 
   createCategoryList({ categoryId }) {
     const { categories } = this.props;
-    const category = PageActions.findById(categoryId, categories);
+    const category = Helpers.findById(categoryId, categories);
 
     return (
       <CategorySelectList
@@ -120,7 +121,7 @@ export class MainPage extends PureComponent {
               actions={ this.filterActions }/>
           </Header>
           <ProgressBar
-            complete={ Actions.completedPercentage(this.props.tasks)}/>
+            complete={ Tasks.completedPercentage(this.props.tasks)}/>
         </div>
         <TwoRows
           className="page__section-flexible"
