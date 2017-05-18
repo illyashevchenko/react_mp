@@ -150,6 +150,10 @@ MainPage.propTypes = {
       toggleDone: PropTypes.func.isRequired,
     }),
   }),
+  location: PropTypes.shape({
+    search: PropTypes.string,
+    pathname: PropTypes.string,
+  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({}),
   }),
