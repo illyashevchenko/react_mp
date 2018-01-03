@@ -35,7 +35,7 @@
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "lint": "eslint ./src",
     "precommit": "npm run lint",
-    "prepush": "npm test",
+    "prepush": "CI=true npm test",
     "build-svg": "node tools/svg-sprite.js"
   }
 }
