@@ -1,3 +1,5 @@
+import { store } from './';
+
 jest.mock('redux', () => ({
   createStore: jest.fn().mockReturnValue({ store: true }),
   applyMiddleware: jest.fn((arg) => arg),
@@ -12,7 +14,6 @@ jest.mock('../reducers', () => ({ godReducer: { reducer: true } }));
 const redux = require('redux');
 const { godReducer } = require('../reducers');
 
-import { store } from './';
 
 describe('on init', () => {
   afterEach(() => {

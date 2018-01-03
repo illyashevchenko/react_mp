@@ -16,9 +16,10 @@ const createClicker = (onClick) =>
   };
 
 const IconButtonRender = (props) =>
-  <Button type="default"
-          { ...props }
-          onClick={ createClicker(props.onClick) }>
+  <Button
+    type="default"
+    { ...props }
+    onClick={ createClicker(props.onClick) }>
     <Icon { ...props }/>
   </Button>;
 

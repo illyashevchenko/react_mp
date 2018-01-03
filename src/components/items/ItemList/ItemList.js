@@ -22,9 +22,10 @@ export class ItemList extends PureComponent {
       className="ItemList__item"
       key={ key(keyPath, item) }>
       {
-        <Element item={ item }
-                 actions={ actions }
-                 isActive={ active === item }/>
+        <Element
+          item={ item }
+          actions={ actions }
+          isActive={ active === item }/>
       }
       {
         item.nested && <ItemList { ...this.props } list={ item.nested }/>

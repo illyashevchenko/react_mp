@@ -8,7 +8,7 @@ import { createLogger } from 'redux-logger';
 import { App } from './App';
 import { godReducer } from './reducers';
 
-import { stubData } from './stub-data';
+import { stubData } from './store/stub-data';
 
 import { SvgLib } from './components/assets';
 import './index.css';

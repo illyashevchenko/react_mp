@@ -51,14 +51,16 @@ export class ActionInput extends PureComponent {
 
     return (
       <div className={ `ActionInput ${ className }` }>
-        <input className="ActionInput__input"
-               placeholder={ placeholder }
-               value={ this.state.value }
-               onChange={ this.handleChange }
-               onKeyDown={ this.handleKeyEvent }/>
-        <Button className="ActionInput__button"
-                siblingOn={ this.buttonSiblingOn }
-                onClick={ this.onClick }>{ actionTitle }</Button>
+        <input
+          className="ActionInput__input"
+          placeholder={ placeholder }
+          value={ this.state.value }
+          onChange={ this.handleChange }
+          onKeyDown={ this.handleKeyEvent }/>
+        <Button
+          className="ActionInput__button"
+          siblingOn={ this.buttonSiblingOn }
+          onClick={ this.onClick }>{ actionTitle }</Button>
       </div>
     );
   }

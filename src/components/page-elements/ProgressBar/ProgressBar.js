@@ -14,8 +14,9 @@ const getStyles = (complete) => Object.assign({
 
 const ProgressBarRender = ({ complete }) =>
   <div className="ProgressBar">
-    <div className="ProgressBar__bar"
-         style={ getStyles(complete) }/>
+    <div
+      className="ProgressBar__bar"
+      style={ getStyles(complete) }/>
   </div>;
 
 ProgressBarRender.PropTypes = {

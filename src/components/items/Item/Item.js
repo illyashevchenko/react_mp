@@ -47,16 +47,18 @@ Item.propTypes = {
 
 export const ItemSection = Pure(
   (props) => (
-    <span className="Item__section">
-     { props.children }
+    <span
+      className="Item__section">
+      { props.children }
     </span>
   )
 );
 
 export const ItemMain = Pure(
   (props) => (
-    <span className="Item__main">
-     { props.children }
+    <span
+      className="Item__main">
+      { props.children }
     </span>
   )
 );

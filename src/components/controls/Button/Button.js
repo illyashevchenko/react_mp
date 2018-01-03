@@ -25,9 +25,10 @@ const getClass = ({ type = 'default', siblingOn = [], size = 'middle', className
 
 
 const ButtonRender = (props) =>
-  <button className={ getClass(props) }
-          type="button"
-          onClick={ !props.disabled && props.onClick }>{ props.children }</button>;
+  <button
+    className={ getClass(props) }
+    type="button"
+    onClick={ !props.disabled && props.onClick }>{ props.children }</button>;
 
 ButtonRender.propTypes = {
   onClick: PropTypes.func.isRequired,

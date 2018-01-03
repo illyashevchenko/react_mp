@@ -3,4 +3,4 @@ import icons from '!raw!./icons.svg'; // eslint-disable-line import/no-webpack-l
 
 export const SvgLib = () =>
   <span style={ { display: 'none' } }
-        dangerouslySetInnerHTML={ { __html: icons } }/>;
+    dangerouslySetInnerHTML={ { __html: icons } }/>;

@@ -9,8 +9,9 @@ import { Item } from '../Item';
 import { IconButton } from '../../controls/IconButton';
 
 const ToDoRender = ({ item, actions }) => (
-  <Item size="large"
-        item={ item }>
+  <Item
+    size="large"
+    item={ item }>
     <input
       className="Item__section"
       type="checkbox"

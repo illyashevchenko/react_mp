@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import Ramda from 'ramda';
 import { MainPage as Component } from './Main';
 
-const { useWith, pick, merge, identity } = Ramda;
+const { pick } = Ramda;
 const storeProps = ['categories', 'tasks'];
-const mapStateToProps = useWith(merge, [pick(storeProps), identity]);
+const mapStateToProps = pick(storeProps);
 
 const mapDispatchToProps = (dispatch) => ({
   actions: {
