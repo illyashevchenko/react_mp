@@ -33,9 +33,10 @@ export class MainPage extends PureComponent {
       remove: this.removeCategory.bind(this),
     }, R.omit(['remove'], categories));
 
-    this.todoActions = Object.assign({
+    this.todoActions = {
       select: this.selectToDo.bind(this),
-    }, tasks);
+      toggleDone: tasks.toggleDone,
+    };
   }
 
   selectCategory(category) {
@@ -53,6 +54,10 @@ export class MainPage extends PureComponent {
     const search = QueryString.stringify(
       Object.assign(currentParams, newParams)
     );
+
+    if (currentSearch.endsWith(search)) { // currentSearch starts with ?
+      return;
+    }
 
     history.push({ pathname, search });
   }
@@ -79,13 +84,21 @@ export class MainPage extends PureComponent {
   }
 
   createTodoList(filter) {
-    const { tasks } = this.props;
+    const { tasks, actions: { tasks: { add } } } = this.props;
+
+    if (!filter.categoryId) {
+      return <div>No category selected</div>;
+    }
+
+    const actions = Object.assign({}, this.todoActions, {
+      add: add.bind(null, filter.categoryId),
+    });
 
     return (
       <TodoList
-        tasks={ tasks }
+        tasks={ Tasks.filtered(filter, tasks) }
         filter={ filter }
-        actions={ this.todoActions }/>
+        actions={ actions }/>
     );
   }
 
@@ -121,7 +134,7 @@ export class MainPage extends PureComponent {
               actions={ this.filterActions }/>
           </Header>
           <ProgressBar
-            complete={ Tasks.completedPercentage(this.props.tasks)}/>
+            complete={ this.props.completedPercentage }/>
         </div>
         <TwoRows
           className="page__section-flexible"
@@ -136,6 +149,7 @@ export class MainPage extends PureComponent {
 MainPage.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  completedPercentage: PropTypes.number,
 
   actions: PropTypes.shape({
     categories: PropTypes.shape({

@@ -1,10 +1,32 @@
 import { connect } from 'react-redux';
 import Ramda from 'ramda';
+import { createSelector } from 'reselect';
+
 import { MainPage as Component } from './Main';
 
-const { pick } = Ramda;
-const storeProps = ['categories', 'tasks'];
-const mapStateToProps = pick(storeProps);
+import * as Tasks from '../../models/tasks';
+
+const { prop } = Ramda;
+const getTasks = prop('tasks');
+
+// Selectors
+const getCompleted = createSelector(
+  getTasks,
+  Tasks.completedList
+);
+
+const getCompletedPercentage = createSelector(
+  [getTasks, getCompleted],
+  (tasks, completed) =>
+    Math.round(100 * completed.length / tasks.length)
+);
+
+
+const mapStateToProps = (state) => ({
+  categories: state.categories,
+  tasks: state.tasks, // todo: since filter is only in url, not inside state
+  completedPercentage: getCompletedPercentage(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   actions: {

@@ -38,19 +38,11 @@ const whereMatcher = ({ search, onlyDone, categoryId }) => ({
   categoryId: equals(categoryId),
 });
 
-const { where, filter } = Ramda;
+const { where, filter, memoize } = Ramda;
 
 const matcher = pipe(whereMatcher, where);
-export const filtered = useWith(filter, [matcher, identity]);
+export const filtered = memoize(useWith(filter, [matcher, identity]));
 
 const { prop } = Ramda;
 
-const completedList = filter(prop('done'));
-
-export const completedPercentage = (list) => {
-  const completed = completedList(list).length;
-  const all = list.length;
-
-  return Math.round(100 * completed / all);
-};
-
+export const completedList = filter(prop('done'));
