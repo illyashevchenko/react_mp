@@ -19,8 +19,8 @@ const ToDoFilterRender = ({ filter, actions: { set } }) =>
       <input
         type="checkbox"
         className="ToDoFilter__checkbox"
-        checked={ filter.onlyDone }
-        onChange={ setItem(set, filter, 'onlyDone', 'checked') }/>
+        checked={ filter.showDone }
+        onChange={ setItem(set, filter, 'showDone', 'checked') }/>
       Show done
     </label>
     <input
@@ -34,7 +34,7 @@ const ToDoFilterRender = ({ filter, actions: { set } }) =>
 ToDoFilterRender.PropTypes = {
   filter: PropTypes.shape({
     search: PropTypes.string,
-    onlyDone: PropTypes.bool,
+    showDone: PropTypes.bool,
   }).isRequired,
   actions: PropTypes.shape({
     set: PropTypes.func.isRequired,

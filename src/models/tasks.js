@@ -32,9 +32,9 @@ const { test, equals, T } = Ramda;
 const stringTest = (string) =>
   test(new RegExp(string, 'ig'));
 
-const whereMatcher = ({ search, onlyDone, categoryId }) => ({
+const whereMatcher = ({ search, showDone, categoryId }) => ({
   title: stringTest(search),
-  done: onlyDone ? equals(true) : T,
+  done: showDone ? T : equals(false),
   categoryId: equals(categoryId),
 });
 

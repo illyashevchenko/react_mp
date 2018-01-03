@@ -9,7 +9,7 @@ describe('basically', () => {
     rendered = shallow(
       <ToDoFilter
         actions={ { set: () => null }}
-        filter={ { search: '', onlyDone: false } }/>
+        filter={ { search: '', showDone: false } }/>
     );
   });
 

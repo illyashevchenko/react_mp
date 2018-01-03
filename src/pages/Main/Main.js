@@ -118,7 +118,7 @@ export class MainPage extends PureComponent {
     return {
       search: filter.search || '',
       categoryId: +filter.categoryId || null,
-      onlyDone: filter.onlyDone === 'true',
+      showDone: filter.showDone === 'true',
     };
   }
 
